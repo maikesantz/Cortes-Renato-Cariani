@@ -1,0 +1,25 @@
+# === Núcleo (obrigatório) ===
+anthropic>=0.40.0            # análise dos cortes (Claude)
+groq>=0.15.0                # transcrição (Whisper)
+yt-dlp>=2025.5.0            # download de áudio/trechos do YouTube
+google-api-python-client>=2.130.0   # YouTube Data API v3
+python-dotenv>=1.0.0       # carrega o .env
+requests>=2.32.0
+pytrends>=4.9.0            # Google Trends (o que está em alta)
+
+# Inteligência local (obrigatório de fato — importados direto por busca_local.py / cortes_existentes.py / busca_transcricao.py)
+scikit-learn>=1.3.0        # TF-IDF da busca no acervo
+numpy>=1.24.0              # busca em transcrição, voiceprints
+
+# === Opcionais (instalar só se for usar o módulo) ===
+# Busca semântica por significado (busca_semantica.py):
+#   pip install sentence-transformers
+# Identificação de falante por voz (speaker_id.py) — pesado:
+#   pip install resemblyzer torch
+# Auto-reframe vertical 9:16 seguindo o rosto (reframe.py):
+#   pip install opencv-python
+
+# === Binários do sistema (NÃO via pip) ===
+# ffmpeg + ffprobe  -> obrigatório (chunking de áudio, frames de capa, reframe)
+#   macOS:  brew install ffmpeg
+#   Ubuntu: sudo apt-get install ffmpeg

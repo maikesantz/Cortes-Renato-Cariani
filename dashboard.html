@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline de Cortes — Ecossistema Cariani</title>
+<style>
+  :root {
+    --bg: #0f0f10;
+    --surface: #1a1a1c;
+    --surface-2: #232325;
+    --text: #f2f0ea;
+    --text-muted: #9e9c95;
+    --border: rgba(255,255,255,0.08);
+    --gold: #c8a24a;
+    --red: #8e1b1b;
+    --green: #2b6e3c;
+    --info: #2d62a6;
+    --warn: #b8801a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.5;
+  }
+  .container { max-width: 1280px; margin: 0 auto; padding: 24px; }
+
+  header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 12px;
+    border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px;
+  }
+  .brand { font-size: 11px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+  h1 { font-size: 26px; margin: 4px 0 0; font-weight: 500; }
+  .sub { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+
+  .actions-bar { display: flex; gap: 8px; }
+  button.btn {
+    background: var(--surface); color: var(--text);
+    border: 1px solid var(--border); padding: 8px 14px; border-radius: 8px;
+    font-size: 13px; cursor: pointer;
+  }
+  button.btn:hover { background: var(--surface-2); }
+  button.btn.primary { background: var(--gold); color: #1a1a1c; border-color: var(--gold); font-weight: 500; }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px; margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat-value { font-size: 26px; font-weight: 500; margin-top: 4px; }
+  .stat-value.gold { color: var(--gold); }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; align-items: center; }
+  .filter-sep { width: 100%; height: 0; margin: 4px 0; }
+  .chip {
+    font-size: 12px; padding: 6px 12px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--border);
+    cursor: pointer; user-select: none;
+  }
+  .chip.active { background: var(--gold); color: #1a1a1c; border-color: var(--gold); font-weight: 500; }
+  .chip-label { font-size: 11px; color: var(--text-muted); margin-right: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .feed { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .cut {
+    display: grid; grid-template-columns: 72px 1fr auto;
+    gap: 16px; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px;
+    transition: border-color 0.15s;
+  }
+  .cut:hover { border-color: rgba(200,162,74,0.4); }
+  .cut.flag-amarelo { border-left: 3px solid var(--warn); }
+  .cut.status-cortado { opacity: 0.5; }
+  .cut.status-descartado { opacity: 0.3; }
+
+  .score-block { text-align: center; }
+  .score { font-size: 28px; font-weight: 500; line-height: 1; }
+  .score-9 { color: #6cce8d; }
+  .score-8 { color: #6ca7ce; }
+  .score-7 { color: var(--text); }
+  .score-low { color: var(--text-muted); }
+  .score-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+  .cut-body { min-width: 0; }
+  .cut-title { font-size: 16px; font-weight: 500; margin: 0 0 4px; }
+  .cut-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .tags { margin-bottom: 8px; }
+  .tag {
+    display: inline-block; font-size: 11px;
+    padding: 3px 9px; border-radius: 999px;
+    margin-right: 4px; margin-bottom: 4px;
+  }
+  .tag-renato { background: #4a3110; color: #f2c870; }
+  .tag-julio { background: #102d22; color: #8be0bc; }
+  .tag-tati { background: #3e1a2a; color: #f0c8d6; }
+  .tag-ciencia { background: #102945; color: #82b5e8; }
+  .tag-disciplina { background: #3e1a2a; color: #e896b3; }
+  .tag-superacao { background: #4a3008; color: #f0b04e; }
+  .tag-tecnica { background: #2d1f4a; color: #b8a4ee; }
+  .tag-irmandade { background: #1a4034; color: #7bd9b5; }
+  .tag-humanidade { background: #4a2010; color: #f0a47e; }
+  .tag-nutricao_pratica { background: #1a3e2c; color: #8be0bc; }
+  .tag-permissao { background: #3e2010; color: #f0c098; }
+  .tag-identificacao { background: #2a1a3e; color: #c8a4f0; }
+  .tag-bordao { background: var(--surface-2); color: var(--gold); }
+  .tag-warn { background: #4a3008; color: #f0c970; }
+  .tag-tema { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+  .just { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 8px; }
+  .transcr {
+    font-size: 13px; font-style: italic;
+    border-left: 2px solid var(--gold);
+    padding: 6px 12px; margin: 8px 0;
+    color: #d4d2cc; background: rgba(200,162,74,0.04);
+  }
+  .copy-sugerida {
+    font-size: 12px; color: var(--text-muted); margin-top: 6px;
+    background: var(--surface-2); padding: 8px 10px; border-radius: 6px;
+  }
+  .copy-sugerida strong { color: var(--text); font-weight: 500; }
+
+  .cut-actions { display: flex; flex-direction: column; gap: 6px; min-width: 100px; }
+  .cut-actions button {
+    font-size: 12px; padding: 8px 10px; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); cursor: pointer;
+  }
+  .cut-actions button:hover { background: var(--surface-2); }
+  .cut-actions .b-play { background: var(--gold); color: #1a1a1c; border-color: var(--gold); font-weight: 500; }
+  .cut-actions .b-cortar { background: var(--green); color: white; border-color: var(--green); }
+  .cut-actions .b-descartar { color: var(--text-muted); }
+
+  .expand-btn {
+    font-size: 11px; background: none; border: none; color: var(--gold); cursor: pointer;
+    padding: 4px 0; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .details { display: none; margin-top: 6px; }
+  .cut.expanded .details { display: block; }
+
+  .temas-bar {
+    margin-top: 32px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  }
+  .temas-bar-label { font-size: 12px; color: var(--text-muted); margin-right: 4px; }
+
+  .modal-bg {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    display: none; align-items: center; justify-content: center; z-index: 100;
+  }
+  .modal-bg.show { display: flex; }
+  .modal { background: var(--surface); border-radius: 12px; padding: 20px; max-width: 720px; width: 90%; }
+  .modal iframe { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px; }
+  .modal .close { float: right; background: none; border: none; color: var(--text); font-size: 20px; cursor: pointer; }
+
+  .empty { text-align: center; padding: 60px 0; color: var(--text-muted); }
+
+  /* capa do corte (headline padrão dos posts) */
+  .headline {
+    font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em;
+    line-height: 1.35; margin: 0 0 10px; color: #f2f0ea;
+    background: #000; border-radius: 8px; padding: 10px 12px; border: 1px solid var(--border);
+  }
+  .headline .hl { color: #e5484d; }
+  .headline-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em; display: block; margin-bottom: 5px; }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 999px; letter-spacing: 0.04em; text-transform: uppercase; margin-right: 6px; }
+  .badge-tese { background: #13351f; color: #7bd99a; border: 1px solid #1f5a33; }
+  .badge-sound { background: #2d2410; color: #e0c060; border: 1px solid #5a4a1f; }
+  .badge-voz-ok { background: #13351f; color: #7bd99a; border: 1px solid #1f5a33; }
+  .badge-voz-alert { background: #3a1414; color: #f08c8c; border: 1px solid #6a2020; }
+  .cut.flag-outro_falante { border-left: 3px solid #e5484d; }
+  .seal-fid { color: #6cce8d; }
+  .seal-fid.warn { color: var(--warn); }
+  .seal-fid.bad { color: #e5484d; }
+  .evid { font-size: 12px; color: #c9c7c0; border-left: 2px solid var(--green); padding: 5px 10px; margin: 6px 0; background: rgba(43,110,60,0.06); }
+  .evid strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div>
+      <div class="brand">Ecossistema Cariani</div>
+      <h1>Pipeline de cortes</h1>
+      <div class="sub" id="sub-info">carregando…</div>
+    </div>
+    <div class="actions-bar">
+      <button class="btn" onclick="recarregar()">↻ atualizar</button>
+      <button class="btn primary" onclick="alert('Use: python src/main.py <url_youtube> --person renato')">+ novo vídeo</button>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">na fila</div>
+      <div class="stat-value gold" id="s-fila">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">cortados hoje</div>
+      <div class="stat-value" id="s-cortados">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">aguardando revisão</div>
+      <div class="stat-value" id="s-rev">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">vídeos analisados</div>
+      <div class="stat-value" id="s-videos">—</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <span class="chip-label">personagem</span>
+    <span class="chip active" data-filter="person" data-value="all">todos</span>
+    <span class="chip" data-filter="person" data-value="renato">renato</span>
+    <span class="chip" data-filter="person" data-value="julio">júlio</span>
+    <span class="chip" data-filter="person" data-value="tati">tati</span>
+    <div class="filter-sep"></div>
+    <span class="chip-label">pilar</span>
+    <span class="chip active" data-filter="pilar" data-value="all">qualquer</span>
+    <span class="chip" data-filter="pilar" data-value="ciencia">ciência</span>
+    <span class="chip" data-filter="pilar" data-value="disciplina">disciplina</span>
+    <span class="chip" data-filter="pilar" data-value="superacao">superação</span>
+    <span class="chip" data-filter="pilar" data-value="tecnica">técnica</span>
+    <span class="chip" data-filter="pilar" data-value="irmandade">irmandade</span>
+    <span class="chip" data-filter="pilar" data-value="humanidade">humanidade</span>
+    <span class="chip" data-filter="pilar" data-value="nutricao_pratica">nutrição</span>
+    <span class="chip" data-filter="pilar" data-value="permissao">permissão</span>
+    <span class="chip" data-filter="pilar" data-value="identificacao">identificação</span>
+    <div class="filter-sep"></div>
+    <span class="chip-label">formato</span>
+    <span class="chip active" data-filter="tipo" data-value="all">todos</span>
+    <span class="chip" data-filter="tipo" data-value="tese_completa">tese completa</span>
+    <span class="chip" data-filter="tipo" data-value="soundbite">soundbite</span>
+    <div class="filter-sep"></div>
+    <span class="chip-label">status</span>
+    <span class="chip active" data-filter="status" data-value="all">todos</span>
+    <span class="chip" data-filter="status" data-value="pending">pendentes</span>
+    <span class="chip" data-filter="status" data-value="cortado">cortados</span>
+    <span class="chip" data-filter="status" data-value="descartado">descartados</span>
+  </div>
+
+  <div class="feed" id="feed"></div>
+
+  <div class="temas-bar" id="temas-bar"></div>
+
+</div>
+
+<div class="modal-bg" id="modal" onclick="if(event.target.id==='modal')fecharModal()">
+  <div class="modal">
+    <button class="close" onclick="fecharModal()">×</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script src="data/cuts/index.js"></script>
+<script>
+  let DATA = window.CUTS_INDEX || { videos: [], cuts: [], temas_em_alta: [] };
+  let LOCAL_STATUS = {}; // override de status feito pelo usuário no browser
+
+  function ler() {
+    try {
+      const s = localStorage.getItem('cariani_status');
+      if (s) LOCAL_STATUS = JSON.parse(s);
+    } catch(e){}
+  }
+  function gravar() {
+    try { localStorage.setItem('cariani_status', JSON.stringify(LOCAL_STATUS)); } catch(e){}
+  }
+  function keyOf(cut) { return (cut.video_id || '') + ':' + cut.id; }
+  function statusDe(cut) {
+    return LOCAL_STATUS[keyOf(cut)] || cut.status || 'pending';
+  }
+  function setStatus(videoId, id, status) {
+    const key = videoId + ':' + id;
+    LOCAL_STATUS[key] = status;
+    gravar();
+    render();
+    // grava no servidor de feedback (se estiver rodando via python3 src/server.py)
+    const c = (DATA.cuts || []).find(x => x.id === id && x.video_id === videoId) || {};
+    fetch('/api/decisions', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        video_id: videoId, cut_id: id, status: status,
+        score: c.score, pilar: c.pilar_primario, tipo: c.tipo_corte,
+        duration: c.duration_seconds, fidelidade: c.fidelidade,
+        falante_voz: c.falante_voz,
+        falante_match: c.falante_voz ? (c.falante_voz === c.person) : true
+      })
+    }).catch(() => {});
+  }
+  function hydrateStatus(cb) {
+    fetch('/api/decisions')
+      .then(r => r.ok ? r.json() : {})
+      .then(s => { LOCAL_STATUS = Object.assign({}, LOCAL_STATUS, s); cb(); })
+      .catch(cb);
+  }
+
+  const activeFilters = { person: 'all', pilar: 'all', tipo: 'all', status: 'all' };
+
+  function destacar(h) {
+    if (!h) return '';
+    return String(h).replace(/\*([^*]+)\*/g, '<span class="hl">$1</span>');
+  }
+
+  document.querySelectorAll('.chip[data-filter]').forEach(el => {
+    el.addEventListener('click', () => {
+      const filt = el.dataset.filter;
+      document.querySelectorAll('.chip[data-filter="' + filt + '"]').forEach(x => x.classList.remove('active'));
+      el.classList.add('active');
+      activeFilters[filt] = el.dataset.value;
+      render();
+    });
+  });
+
+  function scoreClass(s) {
+    if (s >= 9) return 'score-9';
+    if (s >= 8) return 'score-8';
+    if (s >= 7) return 'score-7';
+    return 'score-low';
+  }
+
+  function ytEmbedUrl(cut) {
+    return `https://www.youtube.com/embed/${cut.video_id}?start=${Math.floor(cut.start_seconds)}&autoplay=1`;
+  }
+
+  function ytWatchUrl(cut) {
+    return `https://www.youtube.com/watch?v=${cut.video_id}&t=${Math.floor(cut.start_seconds)}s`;
+  }
+
+  function abrirPlayer(cut) {
+    document.getElementById('modal-content').innerHTML = `
+      <div style="margin-bottom:12px; font-size:14px; font-weight:500;">${cut.title_sugerido}</div>
+      <iframe src="${ytEmbedUrl(cut)}" allow="autoplay" allowfullscreen></iframe>
+      <div style="margin-top:12px; font-size:12px; color: var(--text-muted);">${cut.video_title} • ${cut.start_timestamp} → ${cut.end_timestamp}</div>
+    `;
+    document.getElementById('modal').classList.add('show');
+  }
+  function fecharModal() {
+    document.getElementById('modal').classList.remove('show');
+    document.getElementById('modal-content').innerHTML = '';
+  }
+
+  function tagPilar(p) {
+    const map = {
+      ciencia: 'ciência', disciplina: 'disciplina', superacao: 'superação',
+      tecnica: 'técnica', irmandade: 'irmandade', humanidade: 'humanidade',
+      nutricao_pratica: 'nutrição', permissao: 'permissão', identificacao: 'identificação'
+    };
+    return `<span class="tag tag-${p}">${map[p] || p}</span>`;
+  }
+  function nomePersona(p) {
+    if (p === 'renato') return 'renato';
+    if (p === 'julio') return 'júlio';
+    if (p === 'tati') return 'tati';
+    return p;
+  }
+
+  function render() {
+    const feed = document.getElementById('feed');
+    const cuts = (DATA.cuts || []).slice()
+      .filter(c => activeFilters.person === 'all' || c.person === activeFilters.person)
+      .filter(c => activeFilters.pilar === 'all' || c.pilar_primario === activeFilters.pilar)
+      .filter(c => activeFilters.tipo === 'all' || c.tipo_corte === activeFilters.tipo)
+      .filter(c => activeFilters.status === 'all' || statusDe(c) === activeFilters.status)
+      .sort((a, b) => (b.score || 0) - (a.score || 0));
+
+    if (cuts.length === 0) {
+      feed.innerHTML = '<div class="empty">Nenhum corte com esses filtros.</div>';
+    } else {
+      feed.innerHTML = '';
+      cuts.forEach(c => {
+        const st = statusDe(c);
+        const card = document.createElement('div');
+        card.className = 'cut status-' + st + (c.flag ? ' flag-' + c.flag : '');
+        card.innerHTML = `
+          <div class="score-block">
+            <div class="score ${scoreClass(c.score)}">${(c.score || 0).toFixed(1)}</div>
+            <div class="score-label">score</div>
+          </div>
+          <div class="cut-body">
+            ${c.headline_post ? `<div class="headline"><span class="headline-label">capa do corte</span>${destacar(c.headline_post)}</div>` : ''}
+            <div class="cut-title">${c.title_sugerido || c.video_title}</div>
+            <div class="cut-meta">
+              ${c.tipo_corte ? `<span class="badge ${c.tipo_corte === 'tese_completa' ? 'badge-tese' : 'badge-sound'}">${c.tipo_corte === 'tese_completa' ? 'tese completa' : 'soundbite'}</span>` : ''}
+              ${c.video_title} • ${c.start_timestamp} → ${c.end_timestamp} (${Math.round(c.duration_seconds)}s)
+              ${c.fidelidade != null ? ` • <span class="seal-fid ${c.fidelidade >= 0.85 ? '' : (c.fidelidade >= 0.6 ? 'warn' : 'bad')}">✓ fidelidade ${Math.round(c.fidelidade * 100)}%</span>` : ''}
+              ${c.falante_voz && c.falante_voz !== 'sem_referencia' ? `<br><span class="badge ${c.falante_voz === c.person ? 'badge-voz-ok' : 'badge-voz-alert'}">🔊 voz: ${c.falante_voz}${c.falante_sim ? ` (${Math.round(c.falante_sim * 100)}%)` : ''}${c.falante_voz === c.person ? '' : ' — não é ' + nomePersona(c.person)}</span>` : ''}
+            </div>
+            <div class="tags">
+              <span class="tag tag-${c.person}">${nomePersona(c.person)}</span>
+              ${tagPilar(c.pilar_primario)}
+              ${c.bordao_presente ? `<span class="tag tag-bordao">💬 ${c.bordao_presente}</span>` : ''}
+              ${c.flag === 'amarelo' ? '<span class="tag tag-warn">⚠ revisão</span>' : ''}
+              ${(c.tema_alta_match || []).map(t => `<span class="tag tag-tema">📈 ${t}</span>`).join('')}
+            </div>
+            <div class="just">${c.justificativa_score}</div>
+            <button class="expand-btn" onclick="this.parentElement.parentElement.classList.toggle('expanded')">+ ver transcrição e copy</button>
+            <div class="details">
+              ${c.evidencia_literal ? `<div class="evid"><strong>Evidência (fala literal):</strong> "${c.evidencia_literal}"</div>` : ''}
+              <div class="transcr">"${c.transcricao_trecho}"</div>
+              <div class="copy-sugerida"><strong>Copy sugerida:</strong> ${c.copy_short_sugerida || '(não gerada)'}</div>
+            </div>
+          </div>
+          <div class="cut-actions">
+            <button class="b-play" onclick='abrirPlayer(${JSON.stringify(c).replace(/'/g, "&#39;")})'>▶ ver</button>
+            <button class="b-cortar" onclick="setStatus('${c.video_id}', ${c.id}, 'cortado')">✓ cortado</button>
+            <button class="b-descartar" onclick="setStatus('${c.video_id}', ${c.id}, 'descartado')">✗ descartar</button>
+          </div>
+        `;
+        feed.appendChild(card);
+      });
+    }
+
+    // stats
+    const cuts_all = DATA.cuts || [];
+    const pending = cuts_all.filter(c => statusDe(c) === 'pending').length;
+    const cortados = cuts_all.filter(c => statusDe(c) === 'cortado').length;
+    const flagged = cuts_all.filter(c => c.flag === 'amarelo').length;
+    document.getElementById('s-fila').textContent = pending;
+    document.getElementById('s-cortados').textContent = cortados;
+    document.getElementById('s-rev').textContent = flagged;
+    document.getElementById('s-videos').textContent = (DATA.videos || []).length;
+
+    const gen = DATA.generated_at ? new Date(DATA.generated_at).toLocaleString('pt-BR') : '—';
+    document.getElementById('sub-info').textContent = `Última atualização: ${gen} • ${cuts_all.length} cortes totais`;
+
+    // temas
+    const temas = DATA.temas_em_alta || [];
+    document.getElementById('temas-bar').innerHTML = temas.length > 0
+      ? `<span class="temas-bar-label">📈 temas em alta hoje:</span>` +
+        temas.map(t => `<span class="tag tag-warn">${t.tema}</span>`).join('')
+      : `<span class="temas-bar-label">📈 nenhum tema em alta carregado — rode <code>python src/temas_em_alta.py</code></span>`;
+  }
+
+  function recarregar() {
+    // tenta fetch (precisa de servidor http, file:// não funciona)
+    fetch('data/cuts/index.json')
+      .then(r => r.ok ? r.json() : Promise.reject('no json'))
+      .then(d => { DATA = d; render(); })
+      .catch(() => {
+        // fallback: recarrega a página (vai pegar o index.js de novo)
+        location.reload();
+      });
+  }
+
+  ler();
+  hydrateStatus(render);
+</script>
+</body>
+</html>

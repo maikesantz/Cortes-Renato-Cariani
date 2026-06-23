@@ -1,0 +1,15 @@
+.env
+*.key
+__pycache__/
+*.py[cod]
+.venv/
+*.mp4
+*.mp3
+*.m4a
+*.wav
+*.srt
+data/clipes/
+data/library/*_main.json
+*.npy
+*.npz
+.DS_Store

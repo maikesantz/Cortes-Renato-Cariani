@@ -1,0 +1,349 @@
+{
+  "temas_em_alta": [
+    {
+      "tema": "Jejum Intermitente",
+      "motivo": "Explosão de buscas com termos específicos em ascensão: 18h emagrece quantos quilos/semana (29.700), fases do jejum (20.550), lactante pode fazer (7.300)",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "jejum intermitente 18 horas resultados",
+        "fases do jejum intermitente",
+        "jejum intermitente lactante amamentação",
+        "cardápio jejum intermitente"
+      ]
+    },
+    {
+      "tema": "Lipedema - Diagnóstico e Tratamento",
+      "motivo": "Crescimento de buscas sobre como identificar (sinais, diferença com linfedema) e qual médico procurar, indicando dúvida real da audiência feminina",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "sinais de lipedema pernas",
+        "qual médico trata lipedema",
+        "lipedema ou linfedema diferença",
+        "lipedema grau 2 tratamento"
+      ]
+    },
+    {
+      "tema": "Ozempic/Ozivy - Opções Nacionais e Preço",
+      "motivo": "Forte ascensão em buscas por alternativas nacionais (Ozivy) com foco em preço - públicos buscam opções acessíveis e medicações similares (Rybelsus, Mounjaro)",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "ozivy 1mg preço nacional",
+        "ozempic vs ozivy diferença",
+        "rybelsus 3mg alternativa",
+        "Mounjaro vs Ozempic"
+      ]
+    },
+    {
+      "tema": "Hipertrofia Muscular - Técnica e Ajustes",
+      "motivo": "Buscas sobre técnica (cotovelo, deltoide, peitoral) e impacto de medicações (ibuprofeno, relaxante) indicam público querendo otimizar treino",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "técnica cotovelo hipertrofia ombro",
+        "ibuprofeno atrapalha ganho muscular",
+        "treino peitoral hipertrofia",
+        "relaxante muscular prejudica hipertrofia"
+      ]
+    },
+    {
+      "tema": "Creatina - Eficácia e Marcas",
+      "motivo": "Volume mantido alto com nova ascensão em 'anvisa creatina' (60) - público procura validação regulatória e melhores marcas",
+      "nivel": "medio",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "creatina anvisa aprovada",
+        "melhor marca creatina",
+        "creatina Growth vs concorrentes",
+        "creatina + whey protein benefícios"
+      ]
+    },
+    {
+      "tema": "Whey Protein Isolado",
+      "motivo": "Marcas específicas em ascensão (Dark Lab, Piracanjuba) enquanto mantém volume - público avaliando qualidade e procedência de marcas",
+      "nivel": "medio",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "whey protein isolado melhor opção",
+        "Dark Lab whey protein qualidade",
+        "Piracanjuba whey protein análise",
+        "Growth whey vs isolado"
+      ]
+    }
+  ],
+  "data": "2026-06-20",
+  "fontes_brutas": {
+    "google_trends": {
+      "creatina": [
+        {
+          "q": "anvisa creatina",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "whey",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "melhor creatina",
+          "tipo": "volume",
+          "valor": 99
+        },
+        {
+          "q": "creatina growth",
+          "tipo": "volume",
+          "valor": 95
+        },
+        {
+          "q": "growth",
+          "tipo": "volume",
+          "valor": 93
+        }
+      ],
+      "ozempic": [
+        {
+          "q": "ozivy 1mg",
+          "tipo": "subindo",
+          "valor": 170
+        },
+        {
+          "q": "ozempic nacional preço",
+          "tipo": "subindo",
+          "valor": 130
+        },
+        {
+          "q": "ozivy preco",
+          "tipo": "subindo",
+          "valor": 130
+        },
+        {
+          "q": "rybelsus 3mg",
+          "tipo": "subindo",
+          "valor": 130
+        },
+        {
+          "q": "ozivy",
+          "tipo": "subindo",
+          "valor": 70
+        },
+        {
+          "q": "ozivy bula",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "mounjaro",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "ozivy",
+          "tipo": "volume",
+          "valor": 95
+        },
+        {
+          "q": "ozempic preço",
+          "tipo": "volume",
+          "valor": 85
+        },
+        {
+          "q": "ozempic valor",
+          "tipo": "volume",
+          "valor": 68
+        }
+      ],
+      "lipedema": [
+        {
+          "q": "diosmin",
+          "tipo": "subindo",
+          "valor": 100
+        },
+        {
+          "q": "qual medico cuida de lipedema",
+          "tipo": "subindo",
+          "valor": 90
+        },
+        {
+          "q": "lipedema ou linfedema",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "sinais de lipedema",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "instituto lipedema brasil",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "lipedema grau 2",
+          "tipo": "subindo",
+          "valor": 40
+        },
+        {
+          "q": "o que lipedema",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "o que que é lipedema",
+          "tipo": "volume",
+          "valor": 67
+        },
+        {
+          "q": "o que é lipedema",
+          "tipo": "volume",
+          "valor": 66
+        },
+        {
+          "q": "lipedema pernas",
+          "tipo": "volume",
+          "valor": 44
+        }
+      ],
+      "jejum intermitente": [
+        {
+          "q": "jejum intermitente de 18 horas emagrece quantos quilos por semana",
+          "tipo": "subindo",
+          "valor": 29700
+        },
+        {
+          "q": "fases do jejum intermitente",
+          "tipo": "subindo",
+          "valor": 20550
+        },
+        {
+          "q": "lactante pode fazer jejum intermitente",
+          "tipo": "subindo",
+          "valor": 7300
+        },
+        {
+          "q": "cardápio jejum intermitente 16h pdf",
+          "tipo": "subindo",
+          "valor": 3850
+        },
+        {
+          "q": "benefício do jejum intermitente",
+          "tipo": "subindo",
+          "valor": 250
+        },
+        {
+          "q": "chiclete quebra jejum intermitente",
+          "tipo": "subindo",
+          "valor": 180
+        },
+        {
+          "q": "fazer jejum intermitente",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "o que jejum intermitente",
+          "tipo": "volume",
+          "valor": 70
+        },
+        {
+          "q": "como fazer jejum intermitente",
+          "tipo": "volume",
+          "valor": 43
+        },
+        {
+          "q": "o que é o jejum intermitente",
+          "tipo": "volume",
+          "valor": 25
+        }
+      ],
+      "whey protein": [
+        {
+          "q": "whey protein dark lab é bom",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "whey protein piracanjuba",
+          "tipo": "subindo",
+          "valor": 50
+        },
+        {
+          "q": "whey protein isolado",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "whey isolado",
+          "tipo": "volume",
+          "valor": 97
+        },
+        {
+          "q": "growth whey protein",
+          "tipo": "volume",
+          "valor": 74
+        },
+        {
+          "q": "growth whey",
+          "tipo": "volume",
+          "valor": 73
+        }
+      ],
+      "hipertrofia": [
+        {
+          "q": "unigrande",
+          "tipo": "subindo",
+          "valor": 300
+        },
+        {
+          "q": "hipertrofia vaginal",
+          "tipo": "subindo",
+          "valor": 110
+        },
+        {
+          "q": "ibuprofeno atrapalha hipertrofia",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "tomar relaxante muscular atrapalha a hipertrofia",
+          "tipo": "subindo",
+          "valor": 50
+        },
+        {
+          "q": "hipertrofia prostatica",
+          "tipo": "subindo",
+          "valor": 40
+        },
+        {
+          "q": "hipertrofia adenoamigdaliana",
+          "tipo": "subindo",
+          "valor": 40
+        },
+        {
+          "q": "hipertrofia muscular",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "hipertrofia o que é",
+          "tipo": "volume",
+          "valor": 93
+        },
+        {
+          "q": "treino hipertrofia",
+          "tipo": "volume",
+          "valor": 83
+        },
+        {
+          "q": "o que e hipertrofia",
+          "tipo": "volume",
+          "valor": 68
+        }
+      ]
+    },
+    "trending_br": []
+  }
+}

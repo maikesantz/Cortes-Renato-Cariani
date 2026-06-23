@@ -1,0 +1,222 @@
+{
+  "temas_em_alta": [
+    {
+      "tema": "Jejum Intermitente",
+      "motivo": "Múltiplos termos em ascensão no Google Trends BR, com destaque para dúvidas sobre perda de peso em 14h e 18h de jejum (valores 180 e 110), indicando pico de interesse prático e quantificável.",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "jejum intermitente emagrece",
+        "como fazer jejum intermitente",
+        "fases do jejum intermitente",
+        "jejum intermitente todos os dias"
+      ]
+    },
+    {
+      "tema": "Proteína para Hipertrofia",
+      "motivo": "Termo 'quantos gramas de proteína por kg hipertrofia' em ascensão no Trends (valor 60), combinado com alto volume em 'hipertrofia muscular' e 'treino de hipertrofia', sinaliza dúvida técnica recorrente e crescente.",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "gramas de proteína por quilo",
+        "proteína para ganhar músculo",
+        "ingestão proteína hipertrofia",
+        "quanto comer proteína por dia"
+      ]
+    },
+    {
+      "tema": "Relaxante Muscular e Treino",
+      "motivo": "Termos 'tomar relaxante muscular atrapalha a hipertrofia' e 'dorflex atrapalha hipertrofia' em ascensão no Trends (valores 60 e 50), revelando dúvida real e específica da audiência que treina.",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "dorflex treino musculação",
+        "relaxante muscular atrapalha ganho de massa",
+        "remédio dor atrapalha hipertrofia",
+        "pode tomar dorflex e malhar"
+      ]
+    },
+    {
+      "tema": "Creatina — Benefícios e Uso",
+      "motivo": "Vídeos sobre creatina viralizando no YouTube BR (Diary of a CEO com destaque para fat loss e anti-aging), indicando janela de consumo aberta para conteúdo técnico em português sobre o tema.",
+      "nivel": "alto",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "creatina como tomar",
+        "creatina para que serve",
+        "creatina emagrece",
+        "creatina benefícios"
+      ]
+    },
+    {
+      "tema": "Whey Protein — Tipos e Escolha",
+      "motivo": "Alto volume consistente nos Trends para 'whey isolado' e 'whey protein isolado' (valores 100 e 99), mostrando demanda estável por orientação de escolha e uso correto.",
+      "nivel": "medio",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "whey isolado ou concentrado",
+        "melhor whey protein",
+        "como escolher whey protein",
+        "whey protein para que serve"
+      ]
+    },
+    {
+      "tema": "Técnica de Execução — Ombro e Peitoral",
+      "motivo": "Vídeos de ajuste de execução (cotovelo no ombro, peitoral) viralizando no YouTube BR em canais de hipertrofia, indicando alta receptividade a conteúdo de correção técnica de movimento.",
+      "nivel": "medio",
+      "fonte": "google_trends",
+      "termos_busca": [
+        "execução correta desenvolvimento ombro",
+        "técnica supino peitoral",
+        "erro no treino de ombro",
+        "posição cotovelo supino"
+      ]
+    }
+  ],
+  "data": "2026-06-21",
+  "fontes_brutas": {
+    "google_trends": {
+      "creatina": {
+        "erro": "The request failed: Google returned a response with code 429"
+      },
+      "ozempic": {
+        "erro": "The request failed: Google returned a response with code 429"
+      },
+      "lipedema": {
+        "erro": "The request failed: Google returned a response with code 429"
+      },
+      "jejum intermitente": [
+        {
+          "q": "jejum intermitente de 14h emagrece quantos quilos",
+          "tipo": "subindo",
+          "valor": 180
+        },
+        {
+          "q": "jejum intermitente de 18 horas emagrece quantos quilos por semana",
+          "tipo": "subindo",
+          "valor": 110
+        },
+        {
+          "q": "o'que e jejum intermitente",
+          "tipo": "subindo",
+          "valor": 80
+        },
+        {
+          "q": "jejum intermitente tabela",
+          "tipo": "subindo",
+          "valor": 70
+        },
+        {
+          "q": "pode fazer jejum intermitente todos os dias",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "fases do jejum intermitente",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "o que jejum intermitente",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "jejum intermitente como fazer",
+          "tipo": "volume",
+          "valor": 65
+        },
+        {
+          "q": "o que é o jejum intermitente",
+          "tipo": "volume",
+          "valor": 35
+        },
+        {
+          "q": "jejum intermitente emagrece",
+          "tipo": "volume",
+          "valor": 30
+        }
+      ],
+      "whey protein": [
+        {
+          "q": "whey protein piracanjuba",
+          "tipo": "subindo",
+          "valor": 50
+        },
+        {
+          "q": "whey isolado",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "whey protein isolado",
+          "tipo": "volume",
+          "valor": 99
+        },
+        {
+          "q": "whey protein growth",
+          "tipo": "volume",
+          "valor": 75
+        },
+        {
+          "q": "growth",
+          "tipo": "volume",
+          "valor": 75
+        }
+      ],
+      "hipertrofia": [
+        {
+          "q": "hipertrofia adenoamigdaliana",
+          "tipo": "subindo",
+          "valor": 100
+        },
+        {
+          "q": "hipertrofia vaginal",
+          "tipo": "subindo",
+          "valor": 70
+        },
+        {
+          "q": "hipertrofia das amígdalas",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "tomar relaxante muscular atrapalha a hipertrofia",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "quantos gramas de proteína por kg hipertrofia",
+          "tipo": "subindo",
+          "valor": 60
+        },
+        {
+          "q": "dorflex atrapalha hipertrofia",
+          "tipo": "subindo",
+          "valor": 50
+        },
+        {
+          "q": "hipertrofia muscular",
+          "tipo": "volume",
+          "valor": 100
+        },
+        {
+          "q": "o que é hipertrofia",
+          "tipo": "volume",
+          "valor": 96
+        },
+        {
+          "q": "o que e hipertrofia",
+          "tipo": "volume",
+          "valor": 70
+        },
+        {
+          "q": "treino de hipertrofia",
+          "tipo": "volume",
+          "valor": 57
+        }
+      ]
+    },
+    "trending_br": []
+  }
+}

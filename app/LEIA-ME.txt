@@ -1,0 +1,19 @@
+PAINEL NOVO — Cortes Cariani
+============================
+
+O que é: o visual refinado do painel (Saira Condensed + logo RK), que você
+aprovou no Claude Design. Ele lê o MESMO painel.js que você já tem — então é
+só trocar o index.html e adicionar as logos. Nada do sistema se perde.
+
+COMO INSTALAR (no seu Mac):
+1. Abra a pasta do projeto:  cortes_cariani/app/
+2. (opcional, segurança) renomeie o index.html atual para index_ANTIGO.html
+3. Copie para dentro de cortes_cariani/app/ os arquivos:
+   - index.html         (este é o painel novo — substitui o antigo)
+   - logo-mark.png
+   - logo-full.png
+   - logo.png
+4. Pronto. Abra o cortes_cariani/app/index.html no navegador (duplo clique)
+   ou rode:  python3 src/server.py   e acesse http://localhost:8000
+
+OBS: index_legacy.html é uma cópia do painel antigo, caso queira voltar.

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cortes Cariani · Inteligência de Conteúdo</title>
+<style>
+  :root{
+    --bg:#000000; --bg2:#0b0b0c; --card:#141416; --card2:#1c1c1f;
+    --txt:#f4f2ec; --muted:#9b9890; --line:rgba(255,255,255,.08);
+    --red:#d4202a; --red2:#ff3b42; --hl:#ff2e36; --green:#4ec77f; --blue:#6ca7e8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+  header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(0,0,0,.72);border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo-img{height:40px;width:auto;display:block}
+  .logo-fb{width:40px;height:40px;border-radius:8px;background:#000;border:1px solid rgba(212,32,42,.4);display:grid;place-items:center}
+  .logo-fb svg{display:block}
+  .brand-tx{font-weight:700;letter-spacing:.02em;line-height:1.15}
+  .brand-tx small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+  nav.menu{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+  nav.menu a:hover{color:var(--txt)}
+
+  .hero{padding:56px 0 32px;border-bottom:1px solid var(--line);background:radial-gradient(1100px 400px at 72% -12%,rgba(212,32,42,.16),transparent 70%)}
+  .tagline{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--red2);background:rgba(212,32,42,.1);border:1px solid rgba(212,32,42,.3);padding:5px 12px;border-radius:999px;letter-spacing:.04em}
+  .tagline .dotlive{width:7px;height:7px;border-radius:50%;background:var(--red2);box-shadow:0 0 0 0 rgba(255,59,66,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,59,66,.5)}70%{box-shadow:0 0 0 7px rgba(255,59,66,0)}100%{box-shadow:0 0 0 0 rgba(255,59,66,0)}}
+  .hero h1{font-size:43px;line-height:1.08;margin:18px 0 12px;font-weight:800;max-width:780px;letter-spacing:-.01em}
+  .hero h1 .hl{color:var(--red)}
+  .hero p.sub{color:var(--muted);font-size:17px;max-width:640px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .stat b{font-size:28px;font-weight:800;display:block}
+  .stat b.g{color:var(--red)} .stat b.r{color:var(--red2)} .stat b.b{color:var(--blue)}
+  .stat span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+
+  section{padding:44px 0}
+  .sec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;gap:14px;flex-wrap:wrap}
+  .sec-h h2{font-size:22px;font-weight:800;letter-spacing:-.01em}
+  .sec-h p{color:var(--muted);font-size:14px}
+  .sub-h{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--red2);margin:30px 0 14px;font-weight:600}
+
+  .trends{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .trend{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;transition:.16s}
+  .trend:hover{border-color:rgba(212,32,42,.4)}
+  .trend .th{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+  .trend .tn{font-weight:700;font-size:16px}
+  .trend .why{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .trend .meta{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:11px;padding:3px 9px;border-radius:999px;background:var(--card2);border:1px solid var(--line);color:var(--muted)}
+  .chip.up{color:var(--green);border-color:rgba(78,199,127,.3)}
+  .chip.vol{color:var(--blue);border-color:rgba(108,167,232,.3)}
+  .chip.hi{color:var(--red2);border-color:rgba(212,32,42,.4)}
+  .chip.time{color:var(--red2)}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+  .panel.cortar{border-color:rgba(78,199,127,.25)}
+  .panel.gravar{border-color:rgba(212,32,42,.3)}
+  .panel h3{font-size:16px;margin-bottom:4px}
+  .panel .h-sub{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+  .li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+  .li:first-of-type{border-top:0}
+  .li .dot{margin-top:5px;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .dot.g{background:var(--green)} .dot.r{background:var(--red)}
+  .li .t{font-weight:600;font-size:14px}
+  .li .d{font-size:12.5px;color:var(--muted)}
+
+  .conc{display:flex;flex-direction:column;gap:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .crow{display:flex;align-items:center;gap:14px;padding:13px 18px;border-top:1px solid var(--line)}
+  .crow:first-child{border-top:0}
+  .crow .v{font-weight:800;color:var(--red2);font-size:15px;min-width:78px;font-variant-numeric:tabular-nums}
+  .crow .tt{font-size:13.5px;flex:1}
+  .crow .cn{font-size:11px;color:var(--muted);background:var(--card2);padding:3px 9px;border-radius:999px;border:1px solid var(--line)}
+
+  .cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .minic{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .minic h4{font-size:13px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+  .minic .item{font-size:13px;padding:6px 0;border-top:1px solid var(--line);color:#cfcdc6}
+  .minic .item:first-of-type{border-top:0}
+  .perf{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .pf{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .pf .pn{font-size:13.5px}
+  .pf .pm{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}
+  .pm.good{color:var(--green)} .pm.mid{color:var(--red2)} .pm.low{color:var(--muted)}
+  .pf .pc{font-size:11px;color:var(--muted)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+  .cut{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.18s;display:flex;flex-direction:column}
+  .cut:hover{transform:translateY(-3px);border-color:rgba(212,32,42,.45)}
+  .capa{background:#000;padding:18px;border-bottom:1px solid var(--line);position:relative;min-height:100px;display:flex;align-items:center}
+  .capa .htext{font-weight:800;text-transform:uppercase;font-size:16px;line-height:1.3}
+  .capa .htext .hl{color:var(--hl)}
+  .scoreb{position:absolute;top:12px;right:12px;background:rgba(212,32,42,.16);color:var(--red2);border:1px solid rgba(212,32,42,.35);font-weight:700;font-size:13px;padding:3px 9px;border-radius:8px}
+  .cbody{padding:15px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .cmeta{display:flex;flex-wrap:wrap;gap:7px;font-size:11px}
+  .tag{padding:3px 9px;border-radius:999px;background:var(--card2);border:1px solid var(--line);color:var(--muted)}
+  .tag.tese{color:var(--green);border-color:rgba(78,199,127,.3)} .tag.sound{color:var(--red2)}
+  .tag.ok{color:var(--green)} .tag.story{color:var(--muted)} .tag.voz{color:var(--blue)}
+  .copy{font-size:13px;color:#cfcdc6}
+  .src{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px;margin-top:2px}
+  .formats{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+  .fmt{font-size:11px;color:var(--muted);background:rgba(255,255,255,.04);padding:3px 8px;border-radius:6px;border:1px solid var(--line)}
+  .cactions{display:flex;gap:8px;padding:0 18px 18px}
+  .btn{flex:1;text-align:center;font-size:13px;padding:9px;border-radius:9px;border:1px solid var(--line);background:var(--card2);cursor:pointer;font-weight:500}
+  .btn.play{background:var(--red);color:#fff;border-color:var(--red)}
+  .btn.play:hover{background:var(--red2)}
+
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .step .n{width:30px;height:30px;border-radius:8px;background:rgba(212,32,42,.14);color:var(--red2);display:grid;place-items:center;font-weight:700;margin-bottom:11px}
+  .step h4{font-size:15px;margin-bottom:6px}
+  .step p{font-size:13px;color:var(--muted)}
+  .arrow{color:var(--red);align-self:center;text-align:center;font-size:20px}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px;text-align:center}
+  @media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.cols3{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.arrow{display:none}.hero h1{font-size:32px}nav.menu{display:none}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="brand">
+    <img src="logo.png" alt="Renato Cariani" class="logo-img" onerror="this.onerror=null;this.src='logo.svg'">
+    <div class="brand-tx">Cortes Cariani<small>Inteligência de Conteúdo</small></div>
+  </div>
+  <nav class="menu"><a href="#painel">Painel</a><a href="#concorrencia">Concorrência</a><a href="#tendencia">Tendência</a><a href="#cortes">Cortes</a><a href="#como">Como funciona</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <span class="tagline"><span class="dotlive"></span> sistema ativo · ecossistema Renato Cariani · <span id="data-hero"></span></span>
+  <h1>O acervo do Renato vira <span class="hl">corte pronto</span>, todo dia, sozinho.</h1>
+  <p class="sub">O sistema pesquisa o que está em alta, acha o momento certo no acervo, corta com critério e entrega o pacote pronto. Você só revisa e aprova.</p>
+  <div class="stats" id="stats"></div>
+</div></div>
+
+<section id="painel"><div class="wrap">
+  <div class="sec-h"><h2>☀️ Em alta hoje</h2><p>O que está sendo buscado — com direção, motivo e melhor horário de post</p></div>
+  <div class="trends" id="trends"></div>
+
+  <div class="sub-h">Decisão do dia — o que fazer com cada tema</div>
+  <div class="two">
+    <div class="panel cortar">
+      <h3>✂️ Cortar (já tem material no acervo)</h3>
+      <div class="h-sub">Tema quente que cruza com vídeo longo do Renato → vira corte hoje</div>
+      <div id="cortar"></div>
+    </div>
+    <div class="panel gravar">
+      <h3>🎥 Gravar (tema quente, sem material)</h3>
+      <div class="h-sub">Demanda existe mas o acervo não cobre → pauta de gravação</div>
+      <div id="gravar"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="concorrencia" style="background:var(--bg2)"><div class="wrap">
+  <div class="sec-h"><h2>🥊 Concorrência ao vivo</h2><p>O que está viralizando nos canais que disputam o mesmo público — atualizado junto</p></div>
+  <div class="conc" id="conc"></div>
+</div></section>
+
+<section id="tendencia"><div class="wrap">
+  <div class="sec-h"><h2>📈 Tendência & memória</h2><p>Direção dos temas ao longo dos dias e o que historicamente dá mais view</p></div>
+  <div class="cols3" id="sazon"></div>
+
+  <div class="sub-h">O que performa — multiplicador de views (aprendido do que já foi publicado)</div>
+  <div class="perf" id="perf"></div>
+</div></section>
+
+<section id="cortes" style="background:var(--bg2)"><div class="wrap">
+  <div class="sec-h"><h2>✂️ Cortes prontos</h2><p>Priorizados · cada um com clipe, legenda, capa e 6 formatos</p></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="como"><div class="wrap">
+  <div class="sec-h"><h2>⚙️ Como funciona</h2><p>Da pesquisa ao corte pronto — automático, e tudo roda junto</p></div>
+  <div class="flow">
+    <div class="step"><div class="n">1</div><h4>Pesquisa</h4><p>Google Trends + comentários do público + concorrentes. O que está em alta hoje e pra onde vai.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="n">2</div><h4>Acha o vídeo</h4><p>Cruza o tema quente com o acervo (7.700+ vídeos) e as lives. O momento exato.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="n">3</div><h4>Corta</h4><p>Ideia completa (início→fim), no tom certo, verificado, sem inventar. Voz confere quem fala.</p></div>
+  </div>
+  <div class="flow" style="margin-top:14px">
+    <div class="step"><div class="n">4</div><h4>Produz</h4><p>Clipe + legenda + capa + vertical + 6 formatos. Pronto pro CutPro.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="n">5</div><h4>Aprende</h4><p>Puxa as views reais do que foi publicado e re-prioriza o que performa. Sempre afiado.</p></div>
+    <div class="arrow"></div>
+    <div class="step" style="background:linear-gradient(160deg,#1a0c0d,#141416);border-color:rgba(212,32,42,.3)"><div class="n">✓</div><h4>Você aprova</h4><p>O humano no comando: revisa em minutos e manda publicar. Nada de robô cego.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">Cortes Cariani · sistema de inteligência de conteúdo do ecossistema Renato Cariani · dados gerados pelo dossiê do dia</div></footer>
+
+<script src="painel.js"></script>
+<script>
+const FALLBACK = {data:"—",temas:[],concorrencia:[],sazonalidade:{consolidando:[],novos:[],esfriando:[]},performance:[],cortar:[],gravar:[],cuts:[],custo:"—",stats:{cortes:0,temas:0,videos_cortaveis:0,custo:"—"}};
+const P = window.PAINEL || FALLBACK;
+const hl = s => (s||'').replace(/\*([^*]+)\*/g,'<span class="hl">$1</span>');
+const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+document.getElementById('data-hero').textContent = P.data || '';
+
+const st = P.stats||{};
+document.getElementById('stats').innerHTML = `
+  <div class="stat"><b class="g">${st.cortes??P.cuts.length}</b><span>cortes prontos</span></div>
+  <div class="stat"><b>${st.temas??P.temas.length}</b><span>temas em alta</span></div>
+  <div class="stat"><b class="b">${st.videos_cortaveis??0}</b><span>vídeos cortáveis hoje</span></div>
+  <div class="stat"><b class="r">${st.custo||P.custo||'—'}</b><span>custo do dia</span></div>`;
+
+document.getElementById('trends').innerHTML = (P.temas||[]).map(t=>{
+  const dir = t.direcao==='subindo'
+    ? '<span class="chip up">🔺 subindo</span>'
+    : t.direcao==='volume' ? '<span class="chip vol">▪️ volume alto</span>' : '';
+  const nv = t.nivel==='alto'?'<span class="chip hi">🔥 quente</span>':'<span class="chip">morno</span>';
+  return `<div class="trend">
+    <div class="th"><div class="tn">${esc(t.tema)}</div>${nv}</div>
+    <div class="why">${esc(t.motivo)||'—'}</div>
+    <div class="meta">${dir}<span class="chip time">⏰ ${esc(t.horario)||'12h'}</span></div>
+  </div>`;
+}).join('') || '<p style="color:var(--muted)">Sem temas no dossiê de hoje.</p>';
+
+document.getElementById('cortar').innerHTML = (P.cortar||[]).map(c=>`
+  <div class="li"><div class="dot g"></div><div>
+    <div class="t">${esc(c.tema)}</div>
+    <div class="d">${c.n} vídeo(s) no acervo · oportunidade ${c.opp}${c.video_title?` · top: “${esc(c.video_title).slice(0,46)}…”`:''}</div>
+  </div></div>`).join('') || '<div class="d" style="color:var(--muted)">Nada pronto pra cortar hoje.</div>';
+
+document.getElementById('gravar').innerHTML = (P.gravar||[]).map(g=>`
+  <div class="li"><div class="dot r"></div><div>
+    <div class="t">${esc(g.tema)}</div>
+    <div class="d">${esc(g.motivo)||'tema em alta sem vídeo longo no acervo'}</div>
+  </div></div>`).join('') || '<div class="d" style="color:var(--muted)">Todo tema quente já tem material. 👍</div>';
+
+document.getElementById('conc').innerHTML = (P.concorrencia||[]).map(c=>`
+  <div class="crow"><div class="v">${(c.views||0).toLocaleString('pt-BR')}</div>
+  <div class="tt">${esc(c.titulo)}</div><div class="cn">${esc(c.canal)}</div></div>`).join('')
+  || '<div class="crow"><div class="tt" style="color:var(--muted)">Sem dados de concorrência.</div></div>';
+
+const sz = P.sazonalidade||{};
+const col = (icon,titulo,arr,vazio)=>`<div class="minic"><h4>${icon} ${titulo}</h4>${
+  (arr&&arr.length?arr.map(x=>`<div class="item">${esc(x)}</div>`).join(''):`<div class="item" style="color:var(--muted)">${vazio}</div>`)}</div>`;
+document.getElementById('sazon').innerHTML =
+  col('🟢','Consolidando',sz.consolidando,'—') +
+  col('🆕','Novos / surgindo',sz.novos,'—') +
+  col('🔻','Esfriando',sz.esfriando,'—');
+
+document.getElementById('perf').innerHTML = (P.performance||[]).map(p=>{
+  const cls = p.mult>=1.2?'good':p.mult>=1?'mid':'low';
+  return `<div class="pf"><div><div class="pn">${esc(p.nome)}</div><div class="pc">${p.n} amostra(s)</div></div>
+    <div class="pm ${cls}">${p.mult.toFixed(2)}×</div></div>`;
+}).join('') || '<p style="color:var(--muted)">Sem histórico de performance ainda.</p>';
+
+document.getElementById('grid').innerHTML = (P.cuts||[]).map(c=>{
+  const sc=(c.score||0)>=9?'#4ec77f':(c.score||0)>=8?'#6ca7e8':'var(--red2)';
+  const tese=c.tipo==='tese_completa';
+  const voz = c.falante && c.falante!=='não identificado' ? `<span class="tag voz">🎙️ ${esc(c.falante)}</span>`:'';
+  return `<div class="cut">
+    <div class="capa"><span class="scoreb" style="color:${sc}">${(c.score||0).toFixed(1)}</span><div class="htext">${hl(c.headline_post)}</div></div>
+    <div class="cbody">
+      <div class="cmeta">
+        <span class="tag ${tese?'tese':'sound'}">${tese?'tese completa':'soundbite'}</span>
+        <span class="tag">${c.duration||0}s</span>
+        <span class="tag ${c.publicavel?'ok':'story'}">${c.publicavel?'✓ posta sozinho':'só story'}</span>
+        <span class="tag">${esc(c.pilar)||''}</span>${voz}
+      </div>
+      <div class="copy">${esc(c.copy)}</div>
+      <div class="src">📺 ${esc(c.video_title)||c.video_id} · @ ${c.start_timestamp||''}</div>
+      <div class="formats">${['Reels','TikTok','Short','Carrossel','Thread','Newsletter'].map(f=>`<span class="fmt">${f}</span>`).join('')}</div>
+    </div>
+    <div class="cactions">
+      <a class="btn play" href="https://www.youtube.com/watch?v=${c.video_id}&t=${Math.floor(c.start_seconds||0)}s" target="_blank" rel="noopener">▶ ver no minuto ${c.start_timestamp||''}</a>
+      <div class="btn">✓ aprovar</div>
+    </div>
+  </div>`;
+}).join('') || '<p style="color:var(--muted)">Nenhum corte gerado no dossiê de hoje.</p>';
+</script>
+</body>
+</html>

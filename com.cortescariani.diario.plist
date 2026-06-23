@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.cortescariani.diario</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>/Users/renatocariani/Downloads/cortes_cariani/rodar_diario.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+  <key>StandardOutPath</key><string>/Users/renatocariani/Downloads/cortes_cariani/data/relatorios/launchd.out</string>
+  <key>StandardErrorPath</key><string>/Users/renatocariani/Downloads/cortes_cariani/data/relatorios/launchd.err</string>
+  <key>RunAtLoad</key><false/>
+</dict>
+</plist>

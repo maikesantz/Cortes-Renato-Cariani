@@ -1,0 +1,34 @@
+{
+  "pergunta (?)": {
+    "mult": 0.9,
+    "n": 100
+  },
+  "caixa alta forte": {
+    "mult": 1.35,
+    "n": 380
+  },
+  "cita Toguro": {
+    "mult": 6.05,
+    "n": 16
+  },
+  "cita Balestrin": {
+    "mult": 1.22,
+    "n": 135
+  },
+  "tema treino": {
+    "mult": 1.09,
+    "n": 92
+  },
+  "tema dieta": {
+    "mult": 0.88,
+    "n": 30
+  },
+  "polemica/revela": {
+    "mult": 0.96,
+    "n": 102
+  },
+  "convidado/famoso": {
+    "mult": 0.78,
+    "n": 62
+  }
+}
