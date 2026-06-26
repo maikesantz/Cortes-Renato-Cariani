@@ -1,0 +1,52 @@
+{
+  "data": "25/06/2026",
+  "iso": "2026-06-25",
+  "stats": {
+    "cortes": 12,
+    "temas": 4,
+    "videos_cortaveis": 20,
+    "longos": 2,
+    "custo": "~R$ 4.60"
+  },
+  "temas": [
+    {
+      "tema": "Creatina",
+      "nivel": "alto",
+      "direcao": "—"
+    },
+    {
+      "tema": "Hipertrofia e Platô de Evolução",
+      "nivel": "alto",
+      "direcao": "—"
+    },
+    {
+      "tema": "Ozempic e Emagrecimento com Medicamento",
+      "nivel": "alto",
+      "direcao": "—"
+    },
+    {
+      "tema": "Álcool e Resultados na Academia",
+      "nivel": "medio",
+      "direcao": "—"
+    }
+  ],
+  "concorrencia": [
+    {
+      "views": 9942499,
+      "titulo": "South Korea World Cup team go viral for intense training sessions",
+      "canal": "The Straits Times"
+    },
+    {
+      "views": 8386077,
+      "titulo": "Bitelo halter 160kg !! - #academia #renatocariani #musculação #juliobalestrin",
+      "canal": "Alves"
+    },
+    {
+      "views": 7462531,
+      "titulo": "😢Ronnie Coleman Now Is So Sad To See #bodybuilding #ronniecoleman",
+      "canal": "Gainspire"
+    }
+  ],
+  "top_corte": "EU VOLTEI PRO JEJUM E NÃO FOI PRA *SECAR* — FOI PELA *PRODUTIVIDADE*. QUANDO VOCÊ FICA 16 HORAS SEM COMER, SEU *FOCO* FICA *ELÉTRICO*.",
+  "top_longo": "Você treina costas há ANOS e ainda está usando o *bíceps* — Balestrin corrige ao vivo"
+}

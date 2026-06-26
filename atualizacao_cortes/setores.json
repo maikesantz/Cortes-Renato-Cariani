@@ -1,0 +1,39 @@
+{
+  "balestrin": {
+    "nome": "Cortes do Balestrin",
+    "persona": "julio",
+    "_comentario": "Setor de cortes LONGOS (estilo podcast/live) do Júlio Balestrin. Fonte = IRONCAST + lives + canal principal. Saída/estilo = @cortesdobalestrin.",
+    "canais_fonte": [
+      {
+        "nome": "Julio Balestrin",
+        "handle": "@JulioBalestrin"
+      },
+      {
+        "nome": "IRONCAST",
+        "handle": "@ironcast"
+      },
+      {
+        "nome": "Fala Balestrin",
+        "channel_id": "UCTZzU8niy7x1X4m7LgSc1EQ"
+      }
+    ],
+    "canal_cortes_referencia": {
+      "nome": "Cortes do Balestrin",
+      "handle": "@cortesdobalestrin"
+    },
+    "perfil_corte": {
+      "tipo": "podcast_longo",
+      "dur_min_seg": 300,
+      "dur_floor_seg": 300,
+      "dur_max_seg": 1200,
+      "_nota_duracao": "dur_min_seg = alvo mínimo dito pra IA (5 min). dur_floor_seg = piso DURO do verificador: abaixo disso rejeita. 300s = 5 min 'pra frente'.",
+      "estilo": "segmento completo de podcast: história/argumento/treta do começo ao fim, com contexto. NÃO soundbite curto. Manter o setup + clímax + fecho do papo.",
+      "formatos": [
+        "YouTube (horizontal)",
+        "Cortes longos",
+        "Reels (quando houver pico curto dentro)"
+      ]
+    },
+    "responsavel": "Gustavo"
+  }
+}

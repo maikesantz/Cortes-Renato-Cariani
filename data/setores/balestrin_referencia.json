@@ -1,0 +1,187 @@
+{
+  "canal": "Cortes do Balestrin [OFICIAL]",
+  "handle": "@cortesdobalestrin",
+  "channel_id": "UCBPXUbZhvvfEi66WACxxmQg",
+  "analisado_em": "2026-06-26",
+  "amostra": 200,
+  "inscritos": 124000,
+  "views_mediana": 2504,
+  "views_media": 7308,
+  "duracao_que_performa_seg": 52,
+  "duracao_mediana_geral_seg": 74,
+  "engajamento_medio_pct": 4.09,
+  "cadencia": {
+    "por_semana": 15.6,
+    "intervalo_medio_dias": 0.1
+  },
+  "faixa_que_mais_rende": ">20min",
+  "palavras_que_performam": [
+    {
+      "palavra": "atletas",
+      "lift": 2.0,
+      "aparicoes": 5
+    },
+    {
+      "palavra": "pai",
+      "lift": 2.0,
+      "aparicoes": 5
+    },
+    {
+      "palavra": "falam",
+      "lift": 2.0,
+      "aparicoes": 4
+    },
+    {
+      "palavra": "africanos",
+      "lift": 2.0,
+      "aparicoes": 4
+    },
+    {
+      "palavra": "relógios",
+      "lift": 2.0,
+      "aparicoes": 4
+    },
+    {
+      "palavra": "ombros",
+      "lift": 2.0,
+      "aparicoes": 3
+    },
+    {
+      "palavra": "surpresa",
+      "lift": 2.0,
+      "aparicoes": 3
+    },
+    {
+      "palavra": "passado",
+      "lift": 2.0,
+      "aparicoes": 3
+    },
+    {
+      "palavra": "depois",
+      "lift": 2.0,
+      "aparicoes": 2
+    },
+    {
+      "palavra": "fizeram",
+      "lift": 2.0,
+      "aparicoes": 2
+    },
+    {
+      "palavra": "tiozão",
+      "lift": 2.0,
+      "aparicoes": 2
+    },
+    {
+      "palavra": "manter",
+      "lift": 2.0,
+      "aparicoes": 2
+    },
+    {
+      "palavra": "competição",
+      "lift": 2.0,
+      "aparicoes": 2
+    },
+    {
+      "palavra": "época",
+      "lift": 2.0,
+      "aparicoes": 2
+    },
+    {
+      "palavra": "cachorro",
+      "lift": 2.0,
+      "aparicoes": 2
+    }
+  ],
+  "top_videos": [
+    {
+      "titulo": "PARMEGIANA GIGANTE VS BALESTRIN E FÁBIO GIGA!!",
+      "views": 169930,
+      "dur_min": 15.0,
+      "url": "https://youtu.be/K-yZ21MuUiw"
+    },
+    {
+      "titulo": "ROLOU UM CLIMA ENTRE ELES DURANTE O TREINO!? COCIELO, LALÁ E BALESTRIN...",
+      "views": 135602,
+      "dur_min": 17.1,
+      "url": "https://youtu.be/hnaJBUxdHtI"
+    },
+    {
+      "titulo": "BISTECONE E GABRIEL LEVARAM BALESTRIN E CARIANI PARA TOMAR C4CHAÇA...",
+      "views": 73331,
+      "dur_min": 16.9,
+      "url": "https://youtu.be/TRmnDvs07SM"
+    },
+    {
+      "titulo": "BALESTRIN TROUXE OS ATLETAS AFRICANOS PARA CONHECER O CARIANI",
+      "views": 55110,
+      "dur_min": 28.7,
+      "url": "https://youtu.be/vpyuPRjQrhc"
+    },
+    {
+      "titulo": "É por isso que os AGENTES de INTELIGÊNCIA não podem ser EXPOSTOS #renatocariani #agentesinteligentes",
+      "views": 48518,
+      "dur_min": 1.4,
+      "url": "https://youtu.be/PXNdSqNmLi8"
+    },
+    {
+      "titulo": "Cariani fala sobre HERANÇA deixada pro NETO! #renatocariani #herança #neto #relação #familia",
+      "views": 45569,
+      "dur_min": 0.3,
+      "url": "https://youtu.be/VUWOjfR35j8"
+    },
+    {
+      "titulo": "TOGURO FOI PERSONAL DO BALESTRIN E DO GIGA E FOI A MAIOR DECEPÇÃO!!",
+      "views": 42400,
+      "dur_min": 32.1,
+      "url": "https://youtu.be/jNsvHqsZ1Zc"
+    },
+    {
+      "titulo": "BALESTRIN CAIU NA RISADA COM DILERA TIRANDO O TIOZÃO DO SÉRIO!!",
+      "views": 40809,
+      "dur_min": 9.9,
+      "url": "https://youtu.be/CHy-L4_ntpE"
+    },
+    {
+      "titulo": "RICHARD E BALESTRIN FORAM ATRÁS DAS COBRAS DE MADRUGADA!!",
+      "views": 29880,
+      "dur_min": 20.8,
+      "url": "https://youtu.be/DskXGyDruGE"
+    },
+    {
+      "titulo": "BISTECONE ATRAPALHOU O TREINO DO JULIÃO E FOI HUMILHADO!!",
+      "views": 27493,
+      "dur_min": 24.4,
+      "url": "https://youtu.be/x7HKMM82zcY"
+    },
+    {
+      "titulo": "TCAR pergunta se o JULIÃO toma isso? KKK #renatocariani #juliobalestrin #resenha #brincadeiras #meme",
+      "views": 25907,
+      "dur_min": 0.6,
+      "url": "https://youtu.be/L-jPk3GZDqo"
+    },
+    {
+      "titulo": "CARIANI fala sobre a PAIXÃO do PAI por RELÓGIO! #renatocariani #pai #historia #passado #relogio",
+      "views": 25839,
+      "dur_min": 0.5,
+      "url": "https://youtu.be/zyNT-LYynK8"
+    },
+    {
+      "titulo": "Ele explica como era seu SERVIÇO na CIA BRASILEIRA! #resenha #inteligencia #policia #anonimato",
+      "views": 23635,
+      "dur_min": 1.4,
+      "url": "https://youtu.be/PxnraoMao4Y"
+    },
+    {
+      "titulo": "CACHORRA do CARIANI é muito OBSESSIVA? KKK #cachorro #obsessão #resenha #zueira #memes",
+      "views": 21944,
+      "dur_min": 0.2,
+      "url": "https://youtu.be/VFf46FybV90"
+    },
+    {
+      "titulo": "A FILHA dele descobriu que o PAI era BILIONÁRIO depois de anos! #resenha #bilionários #filha #pai",
+      "views": 21710,
+      "dur_min": 0.3,
+      "url": "https://youtu.be/hZR0rI2IGxs"
+    }
+  ]
+}
