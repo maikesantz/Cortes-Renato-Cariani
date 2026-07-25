@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cortes Cariani · Inteligência de Conteúdo</title>
+<link rel="icon" type="image/png" href="logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08080a; --card:#111114; --card2:#18181c;
+    --txt:#f2f0ea; --muted:#8c8a86; --soft:#cfcdc6; --sub:#a3a09a;
+    --line:rgba(255,255,255,.07);
+    --red:#d11f27; --red2:#ff343d; --green:#46c07a; --blue:#5b9bd6;
+    --cond:'Saira Condensed',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);margin:0}
+  body{font-family:'Saira',system-ui,sans-serif;color:var(--txt);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,52,61,.55)}70%{box-shadow:0 0 0 8px rgba(255,52,61,0)}100%{box-shadow:0 0 0 0 rgba(255,52,61,0)}}
+
+  .accentbar{height:3px;width:100%;background:linear-gradient(90deg,#d11f27 0%,#ff343d 45%,#7a0e13 100%)}
+
+  header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(8,8,10,.78);border-bottom:1px solid var(--line)}
+  .top .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand img{height:34px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(209,31,39,.35))}
+  .brand .bx{display:flex;flex-direction:column;gap:2px;border-left:1px solid rgba(255,255,255,.12);padding-left:14px}
+  .brand .bx .nm{font-family:var(--cond);font-weight:700;font-size:18px;letter-spacing:.06em;line-height:1;text-transform:uppercase}
+  .brand .bx .tg{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.22em;text-transform:uppercase}
+  nav.menu{display:flex;gap:26px;font-size:13.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  nav.menu a{transition:color .15s}
+  nav.menu a:hover,nav.menu a.active{color:var(--txt)}
+
+  .hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden;background:radial-gradient(1200px 460px at 78% -18%,rgba(209,31,39,.20),transparent 68%)}
+  .hero .mark{position:absolute;right:-60px;top:50%;transform:translateY(-50%);height:380px;width:auto;opacity:.05;pointer-events:none}
+  .hero .inner{padding:64px 24px 40px;position:relative;max-width:1180px;margin:0 auto}
+  .live{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:600;color:var(--red2);background:rgba(209,31,39,.10);border:1px solid rgba(209,31,39,.32);padding:6px 14px;border-radius:999px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  .live .dot{width:7px;height:7px;border-radius:50%;background:var(--red2);animation:pulse 2s infinite;flex-shrink:0}
+  .live .sep{color:var(--muted);margin:0 2px}
+  .live .d{color:var(--soft)}
+  .hero h1{font-family:var(--cond);font-size:58px;line-height:1.02;margin:22px 0 16px;font-weight:800;max-width:840px;letter-spacing:-.005em;text-transform:uppercase}
+  .hero h1 .hl{color:var(--red2)}
+  .hero .sub{color:var(--sub);font-size:18px;max-width:660px;font-weight:400}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#d11f27,#7a0e13)}
+  .stat b{font-family:var(--cond);font-size:36px;font-weight:800;line-height:1;display:block;margin-bottom:2px}
+  .stat span{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+
+  section{padding:52px 0}
+  section.alt{background:#0c0c0e;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:12px;font-weight:600;color:var(--red2);text-transform:uppercase;letter-spacing:.16em;margin-bottom:8px}
+  .sec-h{margin-bottom:22px}
+  .sec-h h2{font-family:var(--cond);font-size:30px;font-weight:700;text-transform:uppercase;letter-spacing:-.005em}
+  .subbar{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--red2);margin:38px 0 16px}
+
+  .chip{font-size:11px;padding:4px 10px;border-radius:999px;background:var(--card2);border:1px solid var(--line);color:var(--muted);font-weight:600;letter-spacing:.02em;white-space:nowrap;display:inline-block}
+  .chip.hot{color:var(--red2);border-color:rgba(209,31,39,.45);background:rgba(209,31,39,.10)}
+  .chip.up{color:var(--green);border-color:rgba(70,192,122,.35)}
+  .chip.vol{color:var(--blue);border-color:rgba(91,155,214,.35)}
+  .chip.time{color:var(--red2);border-color:rgba(209,31,39,.3)}
+
+  .trends{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+  .trend{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;transition:border-color .16s}
+  .trend:hover{border-color:rgba(209,31,39,.4)}
+  .trend .th{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+  .trend .tn{font-family:var(--cond);font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.01em}
+  .trend .why{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+  .trend .meta{display:flex;flex-wrap:wrap;gap:7px}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+  .panel.cortar{border-color:rgba(70,192,122,.22)}
+  .cvids{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+  .cvid{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:12px;
+        color:var(--soft);background:rgba(70,192,122,.08);border:1px solid rgba(70,192,122,.20);
+        border-radius:8px;padding:6px 10px;text-decoration:none;transition:.12s}
+  .cvid:hover{background:rgba(70,192,122,.16);color:#fff}
+  .cvid b{color:var(--green);font-variant-numeric:tabular-nums}
+  .cvids-h{font-size:10px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin:4px 0 2px}
+  .vmore{margin-top:2px}
+  .vmore summary{cursor:pointer;font-size:11px;color:var(--red2);list-style:none;padding:5px 2px;user-select:none}
+  .vmore summary::-webkit-details-marker{display:none}
+  .vmore summary:hover{color:#fff}
+  .vmore .cvids{margin-top:4px}
+  .tcbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:2px 0 8px;padding:7px 10px;
+         background:rgba(209,31,39,.07);border:1px solid rgba(209,31,39,.22);border-radius:9px}
+  .tcbar .tclabel{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--muted)}
+  .tcbar .tcrange{font-family:var(--cond);font-size:15px;letter-spacing:.02em;color:var(--txt);font-variant-numeric:tabular-nums}
+  .tcbar .tcrange b{color:var(--red2)}
+  .tcbar .tcrange .ar{color:var(--muted);margin:0 2px}
+  .tcbar .tcdur{font-size:11px;color:var(--soft);margin-left:auto}
+  .tcbar .tccopy{font-family:'Saira',sans-serif;font-size:10px;font-weight:600;cursor:pointer;color:var(--soft);
+         background:var(--card2);border:1px solid var(--line);border-radius:7px;padding:4px 9px;transition:.12s}
+  .tcbar .tccopy:hover{color:#fff;border-color:var(--red2)}
+  .rfilter{display:flex;gap:8px;margin-top:12px}
+  .rfilter button{font-family:'Saira',sans-serif;font-size:12px;font-weight:600;cursor:pointer;padding:7px 14px;
+         border-radius:9px;border:1px solid var(--line);background:var(--card2);color:var(--soft);transition:.12s}
+  .rfilter button:hover{color:#fff}
+  .rfilter button.on{background:var(--red);border-color:var(--red);color:#fff}
+  .freshb{position:absolute;top:10px;left:10px;font-size:10px;font-weight:700;letter-spacing:.04em;
+         background:rgba(209,31,39,.9);color:#fff;padding:3px 8px;border-radius:7px}
+  .busca{display:flex;gap:10px;margin-top:14px;max-width:620px}
+  .busca input{flex:1;font-family:'Saira',sans-serif;font-size:15px;color:var(--txt);background:var(--card2);
+         border:1px solid var(--line);border-radius:11px;padding:13px 16px;outline:none}
+  .busca input:focus{border-color:var(--red2)}
+  .busca button{font-family:'Saira',sans-serif;font-weight:600;font-size:14px;cursor:pointer;color:#fff;
+         background:var(--red);border:1px solid var(--red);border-radius:11px;padding:13px 20px;transition:.12s}
+  .busca button:hover{background:var(--red2);border-color:var(--red2)}
+  .panel.gravar{border-color:rgba(209,31,39,.28)}
+  .panel h3{font-family:var(--cond);font-size:19px;font-weight:700;text-transform:uppercase;margin-bottom:4px}
+  .panel .h-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .li{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-top:1px solid var(--line)}
+  .li .dot{margin-top:6px;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .li .dot.g{background:var(--green)} .li .dot.r{background:var(--red)}
+  .li .t{font-weight:600;font-size:14.5px}
+  .li .d{font-size:12.5px;color:var(--muted)}
+
+  .conc{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .crow{display:flex;align-items:center;gap:16px;padding:14px 20px;border-top:1px solid var(--line)}
+  .crow:first-child{border-top:0}
+  .crow .v{font-family:var(--cond);font-weight:800;color:var(--red2);font-size:18px;min-width:92px;font-variant-numeric:tabular-nums}
+  .crow .tt{font-size:14px;flex:1;font-weight:500}
+  .crow .cn{font-size:11.5px;color:var(--muted);background:var(--card2);padding:4px 11px;border-radius:999px;border:1px solid var(--line);font-weight:600;white-space:nowrap}
+
+  .cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .minic{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .minic h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:13px;color:var(--soft)}
+  .minic .item{font-size:13.5px;padding:8px 0;border-top:1px solid var(--line);color:var(--soft)}
+  .perf{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .pf{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .pf .pn{font-size:14px;font-weight:500}
+  .pf .pc{font-size:11.5px;color:var(--muted)}
+  .pf .pm{font-family:var(--cond);font-weight:800;font-size:19px;font-variant-numeric:tabular-nums}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(345px,1fr));gap:18px}
+  .cut{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,border-color .18s}
+  .cut:hover{transform:translateY(-3px);border-color:rgba(209,31,39,.45)}
+  .capa{background:#000;padding:20px;border-bottom:1px solid var(--line);position:relative;min-height:104px;display:flex;align-items:center;overflow:hidden}
+  .capa .scan{position:absolute;left:-40px;top:-10px;bottom:-10px;width:80px;background:linear-gradient(90deg,transparent,rgba(209,31,39,.14),transparent);transform:skewX(-18deg)}
+  .capa .htext{font-family:var(--cond);font-weight:800;text-transform:uppercase;font-size:19px;line-height:1.12;letter-spacing:.005em;position:relative}
+  .capa .htext .hl{color:var(--red2)}
+  .scoreb{position:absolute;top:12px;right:12px;font-family:var(--cond);background:rgba(0,0,0,.5);font-weight:800;font-size:14px;padding:3px 10px;border-radius:8px;z-index:2}
+  .cbody{padding:16px 18px 18px;display:flex;flex-direction:column;gap:11px;flex:1}
+  .cmeta{display:flex;flex-wrap:wrap;gap:7px;font-size:11px}
+  .tag.tese{color:var(--green);border-color:rgba(70,192,122,.35)}
+  .tag.sound{color:var(--red2);border-color:rgba(209,31,39,.35)}
+  .tag.ok{color:var(--green);border-color:rgba(70,192,122,.35)}
+  .tag.voz{color:var(--blue);border-color:rgba(91,155,214,.3);background:var(--card2)}
+  .copy{font-size:13.5px;color:var(--soft)}
+  .src{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+  .formats{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+  .fmt{font-size:11px;color:var(--muted);background:rgba(255,255,255,.04);padding:4px 9px;border-radius:6px;border:1px solid var(--line);font-weight:500}
+  .cactions{display:flex;gap:8px;padding:0 18px 18px}
+  .btn-play{flex:1;text-align:center;font-size:13px;font-weight:600;padding:10px;border-radius:9px;border:1px solid var(--red);background:var(--red);color:#fff;transition:.15s}
+  .btn-play:hover{background:var(--red2);border-color:var(--red2)}
+  .btn-ok{text-align:center;font-size:13px;font-weight:600;padding:10px 16px;border-radius:9px;border:1px solid rgba(255,255,255,.10);background:var(--card2);cursor:pointer;color:var(--soft);transition:.15s}
+  .btn-ok:hover{border-color:rgba(70,192,122,.5);color:var(--green)}
+  .btn-ok.done{border-color:rgba(70,192,122,.5);color:var(--green);background:rgba(70,192,122,.10)}
+
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .step.final{background:linear-gradient(160deg,#1a0c0d,#111114);border-color:rgba(209,31,39,.32)}
+  .step .n{width:32px;height:32px;border-radius:8px;background:rgba(209,31,39,.14);color:var(--red2);display:grid;place-items:center;font-family:var(--cond);font-weight:800;margin-bottom:12px}
+  .step.final .n{background:rgba(209,31,39,.2)}
+  .step h4{font-family:var(--cond);font-size:17px;font-weight:700;text-transform:uppercase;margin-bottom:7px}
+  .step p{font-size:13px;color:var(--muted)}
+  .arrow{color:var(--red);align-self:center;text-align:center;font-size:22px}
+
+  .histday{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:12px;transition:border-color .16s}
+  .histday:hover{border-color:rgba(209,31,39,.4)}
+  .histday .hd-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:11px}
+  .histday .hd-date{font-family:var(--cond);font-weight:800;font-size:20px;color:var(--red2);letter-spacing:.02em;text-transform:uppercase}
+  .histday .hd-stats{display:flex;flex-wrap:wrap;gap:7px}
+  .histday .hd-temas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+  .histday .hd-vir{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px}
+
+  #ctrl{position:fixed;right:18px;bottom:18px;z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  #ctrl .cbtns{display:flex;gap:8px}
+  #ctrl button{font-family:'Saira',sans-serif;font-weight:600;font-size:13px;padding:11px 16px;border-radius:11px;border:1px solid var(--red);background:var(--red);color:#fff;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.45);transition:.15s}
+  #ctrl button:hover{background:var(--red2);border-color:var(--red2)}
+  #ctrl button.sec{background:var(--card2);border-color:var(--line);color:var(--soft)}
+  #ctrl button:disabled{opacity:.5;cursor:default}
+  #ctrl-status{font-size:12px;color:var(--soft);background:rgba(8,8,10,.92);border:1px solid var(--line);border-radius:9px;padding:8px 12px;max-width:340px;display:none;backdrop-filter:blur(6px)}
+  #ctrl-status.show{display:block}
+  #ctrl-status .spin{display:inline-block;width:10px;height:10px;border:2px solid var(--muted);border-top-color:var(--red2);border-radius:50%;margin-right:7px;vertical-align:-1px;animation:sp .8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center}
+  footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+  footer img{height:48px;width:auto;opacity:.85}
+  footer .ft{color:var(--muted);font-size:13px}
+
+  @media(max-width:880px){
+    nav.menu{display:none}
+    .hero h1{font-size:40px}
+    .hero .inner{padding:48px 24px 32px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .two{grid-template-columns:1fr}
+    .cols3{grid-template-columns:1fr}
+    .flow{grid-template-columns:1fr}
+    .arrow{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="accentbar"></div>
+
+<header class="top"><div class="wrap">
+  <div class="brand">
+    <img src="logo-mark.png" alt="Renato Cariani" onerror="this.onerror=null;this.src='logo.png'">
+    <div class="bx">
+      <span class="nm">Cortes Cariani</span>
+      <span class="tg">Inteligência de Conteúdo</span>
+    </div>
+  </div>
+  <nav class="menu">
+    <a href="#painel">Painel</a>
+    <a href="#pesquisar">Pesquisar</a>
+    <a href="#radar">Radar Geral</a>
+    <a href="#concorrencia">Concorrência</a>
+    <a href="#tendencia">Tendência</a>
+    <a href="#cortes">Cortes</a>
+    <a href="#recentes">Recentes</a>
+    <a href="#longos">Cortes Longos</a>
+    <a href="#pesquisas">Pesquisas Diárias</a>
+    <a href="#como">Como funciona</a>
+  </nav>
+</div></header>
+
+<section class="hero">
+  <img class="mark" src="logo-full.png" alt="" aria-hidden="true">
+  <div class="inner">
+    <span class="live">
+      <span class="dot"></span>
+      Sistema ativo · ecossistema Cariani <span class="sep">·</span> <span class="d" id="data-hero"></span>
+    </span>
+    <h1>O acervo do Renato vira <span class="hl">corte pronto</span>, todo dia, sozinho.</h1>
+    <p class="sub">O sistema pesquisa o que está em alta, acha o momento certo no acervo, corta com critério e entrega o pacote pronto. Você só revisa e aprova.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+</section>
+
+<section id="painel"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow">Em alta hoje <span id="temas-data"></span></div>
+    <h2>O que buscar agora — com direção, motivo e horário</h2>
+  </div>
+  <div class="trends" id="trends"></div>
+
+  <div class="subbar">Decisão do dia — o que fazer com cada tema</div>
+  <div class="two">
+    <div class="panel cortar">
+      <h3>✂️ Cortar — já tem material</h3>
+      <div class="h-sub">Tema quente que cruza com vídeo longo do Renato → vira corte hoje</div>
+      <div id="cortar"></div>
+    </div>
+    <div class="panel gravar">
+      <h3>🎥 Gravar — quente, sem material</h3>
+      <div class="h-sub">Demanda existe mas o acervo não cobre → pauta de gravação</div>
+      <div id="gravar"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="pesquisar" class="alt"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow" style="color:var(--red2)">Garimpo · busca livre no acervo</div>
+    <h2>Pesquisar qualquer tema nos 8 mil vídeos</h2>
+    <p class="h-sub" style="font-size:13px;color:var(--muted);margin-top:6px">Digite um assunto (ex.: treino de costas, emagrecimento, creatina jejum) e ache onde o Renato falou — com o minuto pra cortar.</p>
+    <form id="busca-form" class="busca">
+      <input id="busca-q" type="text" placeholder="ex.: treino de costas" autocomplete="off">
+      <button type="submit">🔍 Buscar</button>
+    </form>
+    <div id="busca-status" class="h-sub" style="font-size:12px;color:var(--muted);margin-top:8px"></div>
+  </div>
+  <div class="grid" id="busca-grid"></div>
+</div></section>
+
+<section id="radar"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow" style="color:var(--red2)">🌍 Radar geral · surfe a onda</div>
+    <h2>Em alta AGORA (no geral) — e o Renato já falou disso</h2>
+    <p class="h-sub" id="radar-sub" style="font-size:13px;color:var(--muted);margin-top:6px">Cruza o que bomba no Brasil hoje com o acervo — corte pronto pra surfar o assunto do momento.</p>
+  </div>
+  <div class="grid" id="radar-grid"></div>
+</div></section>
+
+<section id="concorrencia" class="alt"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow">Concorrência ao vivo</div>
+    <h2>Quem está viralizando no mesmo público</h2>
+  </div>
+  <div class="conc" id="conc"></div>
+</div></section>
+
+<section id="tendencia"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow">Tendência &amp; memória</div>
+    <h2>Para onde os temas estão indo</h2>
+  </div>
+  <div class="cols3" id="sazon"></div>
+
+  <div class="subbar">O que performa — multiplicador de views aprendido</div>
+  <div class="perf" id="perf"></div>
+</div></section>
+
+<section id="cortes" class="alt"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow">Cortes prontos</div>
+    <h2>Priorizados · clipe, legenda, capa e 6 formatos</h2>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="recentes" class="alt"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow" style="color:var(--red2)">Fresquinhos · surfe o próprio post</div>
+    <h2>Recentes — cortes fortes do que ele acabou de postar</h2>
+    <p class="h-sub" id="recentes-sub" style="font-size:13px;color:var(--muted);margin-top:6px"></p>
+    <div class="rfilter" id="recentes-filter">
+      <button data-d="2">últimos 2 dias</button>
+      <button data-d="7">7 dias</button>
+      <button data-d="15" class="on">15 dias</button>
+    </div>
+  </div>
+  <div class="grid" id="grid-recentes"></div>
+</div></section>
+
+<section id="longos"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow" style="color:var(--blue)">Setor · cortes longos (podcast)</div>
+    <h2>Blocos longos — 6 a 20 min, papo fechado do começo ao fim</h2>
+    <p class="h-sub" id="longos-sub" style="font-size:13px;color:var(--muted);margin-top:6px"></p>
+  </div>
+  <div class="grid" id="grid-longos"></div>
+</div></section>
+
+<section id="pesquisas" class="alt"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow">Histórico · memória do sistema</div>
+    <h2>Pesquisas diárias — o que esteve em alta, dia após dia</h2>
+    <p class="h-sub" id="hist-sub" style="font-size:13px;color:var(--muted);margin-top:6px"></p>
+  </div>
+  <div id="hist-list"></div>
+</div></section>
+
+<section id="como"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow">Como funciona</div>
+    <h2>Da pesquisa ao corte pronto — automático</h2>
+  </div>
+  <div class="flow">
+    <div class="step"><div class="n">1</div><h4>Pesquisa</h4><p>Google Trends + comentários do público + concorrentes. O que está em alta e pra onde vai.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="n">2</div><h4>Acha o vídeo</h4><p>Cruza o tema quente com o acervo (7.700+ vídeos) e as lives. O momento exato.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="n">3</div><h4>Corta</h4><p>Ideia completa, no tom certo, verificado, sem inventar. Voz confere quem fala.</p></div>
+  </div>
+  <div class="flow" style="margin-top:14px">
+    <div class="step"><div class="n">4</div><h4>Produz</h4><p>Clipe + legenda + capa + vertical + 6 formatos. Pronto pro CutPro.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="n">5</div><h4>Aprende</h4><p>Puxa as views reais do que foi publicado e re-prioriza o que performa. Sempre afiado.</p></div>
+    <div class="arrow" style="visibility:hidden">→</div>
+    <div class="step final"><div class="n">✓</div><h4>Você aprova</h4><p>O humano no comando: revisa em minutos e manda publicar. Nada de robô cego.</p></div>
+  </div>
+</div></section>
+
+<div id="ctrl">
+  <div id="ctrl-status"></div>
+  <div class="cbtns">
+    <button id="btn-radar" class="sec">🌍 Radar geral</button>
+    <button id="btn-cortes" class="sec">🎬 Gerar cortes</button>
+    <button id="btn-recentes" class="sec">🆕 Cortes recentes</button>
+    <button id="btn-longos" class="sec">🎙️ Cortes longos</button>
+    <button id="btn-atualizar">🔄 Atualizar pesquisas</button>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <img src="logo-full.png" alt="Renato Cariani">
+  <div class="ft">Cortes Cariani · sistema de inteligência de conteúdo do ecossistema Renato Cariani · dados gerados pelo dossiê do dia</div>
+</div></footer>
+
+<!-- window.PAINEL é gerado pelo pipeline: src/dossie_do_dia.py → app/painel.js -->
+<script src="painel.js"></script>
+<script>
+/* ============================================================
+   Renderiza o painel a partir de window.PAINEL (contrato do
+   pipeline). Campos seguem a saída de dossie_do_dia.py; tudo
+   com fallback pra nunca quebrar se faltar dado.
+   ============================================================ */
+const FALLBACK = {data:'—',stats:{},temas:[],cortar:[],gravar:[],concorrencia:[],
+  sazonalidade:{consolidando:[],novos:[],esfriando:[]},performance:[],cuts:[]};
+const P = window.PAINEL || FALLBACK;
+
+const $ = id => document.getElementById(id);
+const esc = s => (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const hl  = s => esc(s).replace(/\*([^*]+)\*/g,'<span class="hl">$1</span>'); // *destaque*
+const num = n => (Number(n)||0).toLocaleString('pt-BR');
+const COL = {red:'#d11f27',red2:'#ff343d',green:'#46c07a',blue:'#5b9bd6',txt:'#f2f0ea'};
+const FORMATS = ['Reels','TikTok','Short','Carrossel','Thread','Newsletter'];
+
+/* hero */
+$('data-hero').textContent = P.data || '';
+const st = P.stats || {};
+const statCards = [
+  {value:String(st.cortes ?? (P.cuts||[]).length), label:'cortes prontos', color:COL.green},
+  {value:String(st.temas ?? (P.temas||[]).length), label:'temas em alta', color:COL.txt},
+  {value:String(st.videos_cortaveis ?? '—'), label:'vídeos cortáveis hoje', color:COL.blue},
+  {value:String(st.custo ?? P.custo ?? '—'), label:'custo do dia', color:COL.red2}
+];
+$('stats').innerHTML = statCards.map(s =>
+  `<div class="stat"><b style="color:${s.color}">${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('');
+
+/* selo de frescor da pesquisa de temas */
+(() => {
+  const el = $('temas-data'); if(!el) return;
+  const d = P.temas_data || '—';
+  const fresco = P.temas_hoje;
+  el.innerHTML = fresco
+    ? `<span style="color:var(--green)">· pesquisa de ${esc(d)} (hoje)</span>`
+    : `<span style="color:var(--red2)">· última pesquisa: ${esc(d)} (desatualizada)</span>`;
+})();
+
+/* lista de vídeos clicáveis (com "ver mais") — usada nas pautas */
+function vidLinks(videos, header){
+  const vs = videos || [];
+  if(!vs.length) return '';
+  const link = v => { const rng = v.fim_ts ? `${esc(v.ini_ts||v.timestamp||'')}→${esc(v.fim_ts)}` : esc(v.timestamp||'');
+    return `<a href="${esc(v.url)}" target="_blank" rel="noopener" class="cvid">▶ ${esc((v.titulo||'vídeo').slice(0,48))} <b>${rng}</b></a>`; };
+  const head = header ? `<div class="cvids-h">${esc(header)}</div>` : '';
+  const first = vs.slice(0,4).map(link).join('');
+  const rest = vs.slice(4);
+  const more = rest.length ? `<details class="vmore"><summary>+ ver mais ${rest.length} vídeo(s)</summary>${rest.map(link).join('')}</details>` : '';
+  return `<div class="cvids">${head}${first}${more}</div>`;
+}
+
+/* temas em alta */
+$('trends').innerHTML = (P.temas||[]).map(t => {
+  const nivel = t.nivel==='alto' ? '<span class="chip hot">🔥 quente</span>' : '<span class="chip">morno</span>';
+  const dir = t.direcao==='subindo' ? '<span class="chip up">▲ subindo</span>'
+            : t.direcao==='volume'  ? '<span class="chip vol">■ volume alto</span>' : '';
+  const onde = (t.videos && t.videos.length)
+    ? vidLinks(t.videos, 'CORTAR DESTES VÍDEOS:')
+    : '<div class="cvids-h" style="margin-top:8px">sem vídeo no acervo — pauta de gravação</div>';
+  return `<div class="trend">
+    <div class="th"><div class="tn">${esc(t.tema)}</div>${nivel}</div>
+    <div class="why">${esc(t.motivo)||'—'}</div>
+    <div class="meta">${dir}<span class="chip time">⏰ ${esc(t.horario)||'12h'}</span></div>
+    ${onde}
+  </div>`;
+}).join('') || '<p style="color:var(--muted)">Sem temas no dossiê de hoje.</p>';
+
+/* decisão do dia */
+$('cortar').innerHTML = (P.cortar||[]).map(c => {
+  const det = c.detalhe || `${c.n ?? '?'} vídeo(s) no acervo · oportunidade ${c.opp ?? '—'}`;
+  // lista clicável (com "ver mais"): abre o YouTube no minuto exato onde ele fala do tema
+  return `<div class="li"><div class="dot g"></div><div style="flex:1">
+    <div class="t">${esc(c.tema)}</div><div class="d">${esc(det)}</div>
+    ${vidLinks(c.videos, '')}</div></div>`;
+}).join('') || '<div class="d" style="color:var(--muted)">Nada pronto pra cortar hoje.</div>';
+
+$('gravar').innerHTML = (P.gravar||[]).map(g => {
+  const det = g.detalhe || g.motivo || 'tema em alta sem vídeo longo dedicado no acervo';
+  return `<div class="li"><div class="dot r"></div><div>
+    <div class="t">${esc(g.tema)}</div><div class="d">${esc(det)}</div></div></div>`;
+}).join('') || '<div class="d" style="color:var(--muted)">Todo tema quente já tem material. 👍</div>';
+
+/* concorrência (aceita P.concorrencia ou P.conc) */
+$('conc').innerHTML = (P.concorrencia||P.conc||[]).map(c =>
+  `<div class="crow"><div class="v">${num(c.views)}</div>
+    <div class="tt">${esc(c.titulo)}</div><div class="cn">${esc(c.canal)}</div></div>`).join('')
+  || '<div class="crow"><div class="tt" style="color:var(--muted)">Sem dados de concorrência.</div></div>';
+
+/* tendência & memória */
+const sz = P.sazonalidade || {};
+const colHtml = (icon,titulo,arr) => `<div class="minic"><h4>${icon} ${esc(titulo)}</h4>${
+  (arr&&arr.length ? arr.map(x=>`<div class="item">${esc(x)}</div>`).join('') : '<div class="item" style="color:var(--muted)">—</div>')}</div>`;
+$('sazon').innerHTML =
+  colHtml('🟢','Consolidando',sz.consolidando) +
+  colHtml('🆕','Novos / surgindo',sz.novos) +
+  colHtml('🔻','Esfriando',sz.esfriando);
+
+$('perf').innerHTML = (P.performance||[]).map(p => {
+  const c = p.mult>=1.2 ? COL.green : p.mult>=1 ? COL.red2 : COL.muted||'#8c8a86';
+  return `<div class="pf"><div><div class="pn">${esc(p.nome)}</div><div class="pc">${p.n} amostra(s)</div></div>
+    <div class="pm" style="color:${c}">${(Number(p.mult)||0).toFixed(2)}×</div></div>`;
+}).join('') || '<p style="color:var(--muted)">Sem histórico de performance ainda.</p>';
+
+/* ===== timecode início→fim (com margem de segurança + copiar) ===== */
+const MARGEM = 2;                         // folga em segundos nas duas pontas
+function hms(sec){ sec=Math.max(0,Math.round(sec||0)); const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
+  return (h?String(h).padStart(2,'0')+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
+function pinicio(c){ return Math.max(0, (Number(c.start_seconds)||0) - MARGEM); }  // início com folga (p/ o link)
+function tcBar(c){
+  const ss=Number(c.start_seconds)||0, ee=Number(c.end_seconds)||0;
+  if(!ee || ee<=ss) return '';           // sem fim confiável → não mostra a barra
+  const s=Math.max(0,ss-MARGEM), e=ee+MARGEM, ini=hms(s), fim=hms(e), dur=hms(e-s);
+  return `<div class="tcbar" title="início → fim do corte (com ${MARGEM}s de folga)">
+    <span class="tclabel">CORTE</span>
+    <span class="tcrange"><b>${ini}</b> <span class="ar">→</span> <b>${fim}</b></span>
+    <span class="tcdur">⏱ ${dur}</span>
+    <button class="tccopy" onclick="copyTC(this,'${ini} - ${fim}')">copiar</button>
+  </div>`;
+}
+function copyTC(btn,txt){ try{navigator.clipboard.writeText(txt);}catch(e){}
+  const o=btn.textContent; btn.textContent='copiado ✓'; setTimeout(()=>btn.textContent=o,1200); }
+
+/* cortes prontos */
+$('grid').innerHTML = (P.cuts||[]).map((c,i) => {
+  const tese = c.tipo==='tese_completa';
+  const score = Number(c.score)||0;
+  const sc = score>=9 ? COL.green : score>=8 ? COL.blue : COL.red2;
+  const scBorder = tese ? 'rgba(70,192,122,.4)' : 'rgba(255,255,255,.12)';
+  const headline = c.headline_post || c.headline || c.title_sugerido || '';
+  const publicavel = c.publicavel ?? c.publicavel_sozinho;
+  const falante = c.falante || c.falante_voz;
+  const voz = (falante && falante!=='não identificado') ? `<span class="chip tag voz">🎙️ ${esc(falante)}</span>` : '';
+  const src = c.video_title || c.src || c.video_id || '';
+  const url = 'https://www.youtube.com/watch?v='+encodeURIComponent(c.video_id||'')+'&t='+Math.floor(pinicio(c))+'s';
+  return `<div class="cut">
+    <div class="capa">
+      <div class="scan"></div>
+      <span class="scoreb" style="color:${sc};border:1px solid ${scBorder}">${score.toFixed(1)}</span>
+      <div class="htext">${hl(headline)}</div>
+    </div>
+    <div class="cbody">
+      <div class="cmeta">
+        <span class="chip tag ${tese?'tese':'sound'}">${tese?'tese completa':'soundbite'}</span>
+        <span class="chip">${c.duration||c.duration_seconds||0}s</span>
+        <span class="chip ${publicavel?'tag ok':''}">${publicavel?'✓ posta sozinho':'só story'}</span>
+        <span class="chip">${esc(c.pilar||c.pilar_primario||'')}</span>
+        ${voz}
+      </div>
+      ${tcBar(c)}
+      <div class="copy">${esc(c.copy||c.copy_short_sugerida||'')}</div>
+      <div class="src">📺 ${esc(src)}${c.start_timestamp?` · @ ${esc(c.start_timestamp)}`:''}</div>
+      <div class="formats">${FORMATS.map(f=>`<span class="fmt">${f}</span>`).join('')}</div>
+    </div>
+    <div class="cactions">
+      <a class="btn-play" href="${url}" target="_blank" rel="noopener">▶ ver no minuto ${esc(c.start_timestamp||'')}</a>
+      <div class="btn-ok" data-cut="${i}">✓ aprovar</div>
+    </div>
+  </div>`;
+}).join('') || '<p style="color:var(--muted)">Nenhum corte gerado no dossiê de hoje.</p>';
+
+/* cortes longos (setor isolado — mesmo card, formato podcast) */
+const longos = P.longos || P.cuts_longos || [];
+const setoresLongos = [...new Set(longos.map(c => c.setor).filter(Boolean))];
+$('longos-sub').textContent = longos.length
+  ? `${longos.length} bloco(s) longo(s)` + (setoresLongos.length ? ` · ${setoresLongos.join(' · ')}` : '')
+  : '';
+$('grid-longos').innerHTML = longos.map((c,i) => {
+  const score = Number(c.score)||0;
+  const sc = score>=9 ? COL.green : score>=7.5 ? COL.blue : COL.red2;
+  const headline = c.headline_post || c.headline || c.title_sugerido || '';
+  const mins = ((Number(c.duration)||0)/60);
+  const dur = mins>=1 ? mins.toFixed(1)+' min' : (Number(c.duration)||0)+'s';
+  const falante = c.falante && c.falante!=='não identificado' ? `<span class="chip tag voz">🎙️ ${esc(c.falante)}</span>` : '';
+  const setor = c.setor ? `<span class="chip" style="color:var(--blue);border-color:rgba(91,155,214,.35)">${esc(c.setor)}</span>` : '';
+  const resp = c.responsavel ? `<span class="chip">👤 ${esc(c.responsavel)}</span>` : '';
+  const src = c.video_title || c.src || c.video_id || '';
+  const url = 'https://www.youtube.com/watch?v='+encodeURIComponent(c.video_id||'')+'&t='+Math.floor(pinicio(c))+'s';
+  return `<div class="cut">
+    <div class="capa">
+      <div class="scan"></div>
+      <span class="scoreb" style="color:${sc};border:1px solid rgba(91,155,214,.4)">${score.toFixed(1)}</span>
+      <div class="htext">${hl(headline)}</div>
+    </div>
+    <div class="cbody">
+      <div class="cmeta">
+        <span class="chip tag voz">bloco longo</span>
+        <span class="chip">${esc(dur)}</span>
+        ${setor}${resp}
+        <span class="chip">${esc(c.pilar||c.pilar_primario||'')}</span>
+        ${falante}
+      </div>
+      ${tcBar(c)}
+      <div class="copy">${esc(c.copy||c.copy_short_sugerida||'')}</div>
+      <div class="src">📺 ${esc(src)}</div>
+      <div class="formats"><span class="fmt">YouTube (horizontal)</span><span class="fmt">Corte longo</span><span class="fmt">Reels (pico interno)</span></div>
+    </div>
+    <div class="cactions">
+      <a class="btn-play" href="${url}" target="_blank" rel="noopener">▶ ver no minuto ${esc(c.start_timestamp||'')}</a>
+      <div class="btn-ok" data-cut="L${i}">✓ aprovar</div>
+    </div>
+  </div>`;
+}).join('') || '<p style="color:var(--muted)">Nenhum corte longo gerado ainda. Rode <code>python3 src/cortes_longos.py &lt;url&gt; --setor balestrin</code>.</p>';
+
+/* ===== RECENTES — cortes do que ele postou há pouco (filtro 2/7/15 dias) ===== */
+const recentes = P.recentes || [];
+function pintaRecentes(dias){
+  const arr = recentes.filter(c => (Number(c.dias_atras)||999) <= dias);
+  $('grid-recentes').innerHTML = arr.map((c,i) => {
+    const score = Number(c.score)||0;
+    const sc = score>=9 ? COL.green : score>=8 ? COL.blue : COL.red2;
+    const headline = c.headline_post || c.headline || '';
+    const url = 'https://www.youtube.com/watch?v='+encodeURIComponent(c.video_id||'')+'&t='+Math.floor(pinicio(c))+'s';
+    const quando = (Number(c.dias_atras)||0)<=0 ? 'hoje' : `há ${c.dias_atras}d`;
+    const canal = c.canal ? `<span class="chip">${esc(c.canal)}</span>` : '';
+    return `<div class="cut">
+      <div class="capa"><div class="scan"></div>
+        <span class="scoreb" style="color:${sc};border:1px solid rgba(209,31,39,.4)">${score.toFixed(1)}</span>
+        <span class="freshb">🆕 ${esc(quando)}</span>
+        <div class="htext">${hl(headline)}</div>
+      </div>
+      <div class="cbody">
+        <div class="cmeta"><span class="chip tag ${c.publicavel?'ok':''}">${c.publicavel?'✓ posta sozinho':'só story'}</span>
+          <span class="chip">${c.duration||0}s</span>${canal}<span class="chip">${esc(c.pilar||'')}</span></div>
+        ${tcBar(c)}
+        <div class="copy">${esc(c.copy||'')}</div>
+        <div class="src">📺 ${esc(c.video_title||'')} · postado ${esc(c.publicado_em||'')}</div>
+        <div class="formats">${FORMATS.map(f=>`<span class="fmt">${f}</span>`).join('')}</div>
+      </div>
+      <div class="cactions"><a class="btn-play" href="${url}" target="_blank" rel="noopener">▶ ver no minuto ${esc(c.start_timestamp||'')}</a></div>
+    </div>`;
+  }).join('') || `<p style="color:var(--muted)">Nenhum corte de post recente (${dias}d). Clique em "🆕 Cortes recentes" nos botões — ele pega os vídeos que o Renato postou há pouco.</p>`;
+  if($('recentes-sub')) $('recentes-sub').textContent = recentes.length
+    ? `${arr.length} corte(s) de posts dos últimos ${dias} dias` : 'Sem cortes recentes ainda — clique no botão 🆕 Cortes recentes.';
+}
+(function(){
+  const fil = $('recentes-filter');
+  if(fil) fil.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    fil.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); pintaRecentes(Number(b.dataset.d));
+  }));
+  pintaRecentes(15);
+})();
+
+/* ===== PESQUISAR — busca livre no acervo (só funciona no painel local) ===== */
+(function(){
+  const form=$('busca-form'), inp=$('busca-q'), grid=$('busca-grid'), st=$('busca-status');
+  if(!form) return;
+  const card = r => `<div class="cut">
+    <div class="capa"><div class="scan"></div><div class="htext">${hl((r.titulo||'').slice(0,60))}</div></div>
+    <div class="cbody">
+      ${tcBar({start_seconds:r.start_seconds,end_seconds:r.end_seconds})}
+      <div class="copy">"${esc(r.trecho||'')}"</div>
+      <div class="src">📺 ${esc(r.titulo||'')}</div>
+    </div>
+    <div class="cactions"><a class="btn-play" href="${esc(r.url)}" target="_blank" rel="noopener">▶ ver no minuto ${esc(r.ini_ts||'')}</a></div>
+  </div>`;
+  async function buscar(q){
+    st.textContent='buscando…'; grid.innerHTML='';
+    let j;
+    try{ j = await (await fetch('/api/search?q='+encodeURIComponent(q))).json(); }
+    catch(e){ st.textContent='⚠ A busca só funciona no painel local (com o servidor ligado).'; return; }
+    if(j && j.pronto===false){
+      const s=j.status||{};
+      st.textContent=`indexando o acervo… ${s.feitos||0}/${s.total||'?'} — espera uns segundos e busca de novo.`;
+      return;
+    }
+    const rs=(j&&j.resultados)||[];
+    st.textContent = rs.length ? `${rs.length} vídeo(s) onde ele fala de "${esc(q)}"` : `nada encontrado pra "${esc(q)}".`;
+    grid.innerHTML = rs.map(card).join('');
+  }
+  form.addEventListener('submit', e=>{ e.preventDefault(); const q=inp.value.trim(); if(q) buscar(q); });
+})();
+
+/* pesquisas diárias (histórico — um cartão por dia) */
+const hist = P.historico || [];
+$('hist-sub').textContent = hist.length ? `${hist.length} dia(s) registrados` : '';
+$('hist-list').innerHTML = hist.map(d => {
+  const s = d.stats || {};
+  const temas = (d.temas||[]).map(t =>
+    `<span class="chip ${t.nivel==='alto'?'hot':''}">${t.direcao==='subindo'?'▲ ':''}${esc(t.tema)}</span>`).join('');
+  const vir = (d.concorrencia||[])[0];
+  const topc = d.top_corte ? `✂️ ${esc(d.top_corte)}` : '';
+  const topl = d.top_longo ? ` · 🎬 ${esc(d.top_longo)}` : '';
+  return `<div class="histday">
+    <div class="hd-top">
+      <div class="hd-date">${esc(d.data)}</div>
+      <div class="hd-stats">
+        <span class="chip" style="color:var(--green);border-color:rgba(70,192,122,.35)">${s.cortes||0} cortes</span>
+        <span class="chip" style="color:var(--blue);border-color:rgba(91,155,214,.35)">${s.longos||0} longos</span>
+        <span class="chip">${s.temas||0} temas</span>
+        <span class="chip" style="color:var(--red2);border-color:rgba(209,31,39,.3)">${esc(s.custo||'—')}</span>
+      </div>
+    </div>
+    <div class="hd-temas">${temas || '<span class="chip">sem temas</span>'}</div>
+    ${(topc||vir) ? `<div class="hd-vir">${topc}${topl}${vir?` &nbsp;·&nbsp; 🔥 ${num(vir.views)} ${esc(vir.titulo).slice(0,46)} (${esc(vir.canal)})`:''}</div>` : ''}
+  </div>`;
+}).join('') || '<p style="color:var(--muted)">Ainda sem histórico. A cada vez que o dossiê roda, o dia fica registrado aqui — e vira memória do sistema.</p>';
+
+/* interações */
+document.querySelectorAll('.btn-ok').forEach(b => b.addEventListener('click', () => {
+  const done = b.classList.toggle('done');
+  b.textContent = done ? '✓ aprovado' : '✓ aprovar';
+}));
+
+const links = [...document.querySelectorAll('nav.menu a')];
+const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spy = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){
+    const id = '#'+e.target.id;
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href')===id));
+  }
+}), {rootMargin:'-45% 0px -50% 0px'});
+sections.forEach(s => spy.observe(s));
+
+/* radar geral — em alta no geral + Renato já falou (corte na hora) */
+const radar = P.radar_geral || [];
+if ($('radar-sub')) $('radar-sub').textContent = radar.length
+  ? `${radar.length} tendência(s) de hoje que o Renato já comentou — corte pronto pra surfar a onda`
+  : 'Clique no botão "🌍 Radar geral" pra cruzar o que bomba hoje com o acervo.';
+if ($('radar-grid')) $('radar-grid').innerHTML = radar.map(r => {
+  const achs = r.achados || [];
+  const a = achs[0] || {};
+  const url = 'https://www.youtube.com/watch?v='+encodeURIComponent(a.video_id||'')+'&t='+Math.floor(a.t_seg||0)+'s';
+  const linkA = x => `<a href="https://www.youtube.com/watch?v=${encodeURIComponent(x.video_id||'')}&t=${Math.floor(x.t_seg||0)}s" target="_blank" rel="noopener" class="cvid">▶ ${esc((x.titulo||'vídeo').slice(0,50))} <b>${esc(x.timestamp||'')}</b></a>`;
+  const mais = achs.length>1
+    ? `<details class="vmore"><summary>ver ${r.n} vídeo(s) com "${esc(r.trend)}"</summary><div class="cvids">${achs.map(linkA).join('')}</div></details>` : '';
+  return `<div class="cut">
+    <div class="capa"><div class="scan"></div>
+      <span class="scoreb" style="color:var(--red2);border:1px solid rgba(209,31,39,.4)">🔥 ${r.n}</span>
+      <div class="htext">EM ALTA: <span class="hl">${esc(r.trend)}</span></div>
+    </div>
+    <div class="cbody">
+      <div class="cmeta"><span class="chip hot">🌍 em alta hoje</span><span class="chip tag ok">✓ Renato já falou</span></div>
+      ${tcBar(a)}
+      <div class="copy">"${esc(a.trecho||'')}"</div>
+      <div class="src">📺 ${esc(a.titulo||'')} · @ ${esc(a.timestamp||'')}</div>
+      ${mais}
+    </div>
+    <div class="cactions"><a class="btn-play" href="${url}" target="_blank" rel="noopener">▶ ver o momento (${esc(a.timestamp||'')})</a></div>
+  </div>`;
+}).join('') || '<p style="color:var(--muted)">Sem radar ainda. Clique em "🌍 Radar geral" nos botões.</p>';
+
+/* ===== Botões de ação — disparam pesquisas/cortes SEM terminal =====
+   Só funcionam quando o app é aberto pelo servidor (python3 src/server.py → localhost:8000). */
+(function(){
+  const st = $('ctrl-status'), bA = $('btn-atualizar'), bC = $('btn-cortes'), bR = $('btn-radar'), bL = $('btn-longos'), bN = $('btn-recentes');
+  if(!st || !bA) return;
+  let polling = null;
+  const show = (msg, spin) => { st.classList.add('show'); st.innerHTML = (spin?'<span class="spin"></span>':'') + esc(msg); };
+  const setBusy = b => { bA.disabled = b; bC.disabled = b; if(bR) bR.disabled = b; if(bL) bL.disabled = b; if(bN) bN.disabled = b; };
+  async function poll(){
+    try{
+      const s = await (await fetch('/api/status')).json();
+      const last = (s.log && s.log[s.log.length-1]) || 'rodando…';
+      if(s.done){
+        clearInterval(polling); polling = null; setBusy(false);
+        show(s.ok ? '✓ pronto! recarregando…' : '✗ falhou — veja a janela do servidor', false);
+        if(s.ok) setTimeout(()=>location.reload(), 1400);
+      } else { show(last, true); }
+    }catch(e){}
+  }
+  async function run(task){
+    setBusy(true); show('iniciando…', true);
+    let r;
+    try{ r = await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task})}); }
+    catch(e){ setBusy(false); show('⚠ Abra pelo servidor: rode "python3 src/server.py" e acesse localhost:8000', false); return; }
+    const j = await r.json();
+    if(j.busy){ show('já tem uma tarefa rodando…', true); return; }
+    if(polling) clearInterval(polling);
+    polling = setInterval(poll, 1500); poll();
+  }
+  bA.addEventListener('click', ()=>run('atualizar'));
+  bC.addEventListener('click', ()=>run('cortes'));
+  if(bR) bR.addEventListener('click', ()=>run('radar'));
+  if(bL) bL.addEventListener('click', ()=>run('longos'));
+  if(bN) bN.addEventListener('click', ()=>run('recentes'));
+  // Sem backend (versão pública online) → esconde botões E a busca (só funcionam no local).
+  fetch('/api/status').catch(()=>{
+    ['ctrl','pesquisar'].forEach(id => { const e = document.getElementById(id); if(e) e.style.display='none'; });
+    const nav = document.querySelector('nav.menu a[href="#pesquisar"]'); if(nav) nav.style.display='none';
+  });
+})();
+</script>
+</body>
+</html>
